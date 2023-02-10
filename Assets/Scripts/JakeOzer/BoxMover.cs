@@ -6,15 +6,13 @@ public class BoxMover : MonoBehaviour
 {
     [SerializeField] private List<Box> boxes;
     [SerializeField] private List<GameObject> conveyorList;
-    private float conveyorTime;
 
-    private int conveyorIndex = 0;
     [SerializeField] private float conveyorSpeed = 1f;
 
-    void Awake()
+    public void AddBoxToGameList(Box box)
     {
-        boxes[0].transform.position = conveyorList[0].transform.position; //temporay use of first box until spawning is implemented 
-        conveyorTime = Time.time;
+        this.boxes.Add(box);
+        box.transform.position = conveyorList[0].transform.position;
     }
 
     private void FixedUpdate()
@@ -23,7 +21,11 @@ public class BoxMover : MonoBehaviour
         {
             float t = (Time.time - box.GetConveyorTime()) / conveyorSpeed;
 
-            box.transform.position = Vector3.Lerp(conveyorList[box.GetConveyorIndex()].transform.position, conveyorList[box.GetConveyorIndex() + 1].transform.position, t);
+            //Only lerp box if there is another conveyor to move to, else dont move box
+            if (box.GetConveyorIndex() < (conveyorList.Count - 1))
+            {
+                box.transform.position = Vector3.Lerp(conveyorList[box.GetConveyorIndex()].transform.position, conveyorList[box.GetConveyorIndex() + 1].transform.position, t);
+            }
 
             if (t >= 1)
             {
