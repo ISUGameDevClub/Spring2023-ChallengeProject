@@ -7,6 +7,12 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private float spawnRate;
     [SerializeField] private GameObject boxPrefab;
     private float spawnTimer;
+    private BoxMover boxMover;
+
+    private void Start()
+    {
+        boxMover = FindObjectOfType<BoxMover>();
+    }
 
     private void Update()
     {
@@ -22,6 +28,7 @@ public class BoxSpawner : MonoBehaviour
     private void SpawnBox()
     {
         //NOTE: the box spawn pos will default to first conveyor location upon instantiation
-        Instantiate(boxPrefab, transform.position, Quaternion.identity);
+        Box newBox = Instantiate(boxPrefab, transform.position, Quaternion.identity).GetComponent<Box>();
+        boxMover.AddBoxToGameList(newBox);
     }
 }
