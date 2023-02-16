@@ -19,17 +19,20 @@ public class BoxMover : MonoBehaviour
     {
         foreach (Box box in boxes)
         {
-            float t = (Time.time - box.GetConveyorTime()) / conveyorSpeed;
-
-            //Only lerp box if there is another conveyor to move to, else dont move box
-            if (box.GetConveyorIndex() < (conveyorList.Count - 1))
+            if (box != null)
             {
-                box.transform.position = Vector3.Lerp(conveyorList[box.GetConveyorIndex()].transform.position, conveyorList[box.GetConveyorIndex() + 1].transform.position, t);
-            }
+                float t = (Time.time - box.GetConveyorTime()) / conveyorSpeed;
 
-            if (t >= 1)
-            {
-                box.NextConveyor();
+                //Only lerp box if there is another conveyor to move to, else dont move box
+                if (box.GetConveyorIndex() < (conveyorList.Count - 1))
+                {
+                    box.transform.position = Vector3.Lerp(conveyorList[box.GetConveyorIndex()].transform.position, conveyorList[box.GetConveyorIndex() + 1].transform.position, t);
+                }
+
+                if (t >= 1)
+                {
+                    box.NextConveyor();
+                }
             }
         }
     }

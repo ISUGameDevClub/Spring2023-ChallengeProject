@@ -6,12 +6,10 @@ public class Box : MonoBehaviour
 {
     private float conveyorTime;
     private int conveyorIndex = 0;
-    private BoxMover boxMover;
     
     private void Start()
     {
-        boxMover = FindObjectOfType<BoxMover>();
-        boxMover.AddBoxToGameList(this);
+        conveyorTime = Time.time;
     }
 
     public float GetConveyorTime() => conveyorTime;
