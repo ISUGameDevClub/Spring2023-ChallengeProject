@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxMover : MonoBehaviour
 {
     [SerializeField] private List<Box> boxes;
-    [SerializeField] private List<GameObject> conveyorList;
+    [SerializeField] public List<GameObject> conveyorList;
 
     [SerializeField] private float conveyorSpeed = 1f;
 
