@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BuildModeEnabler : MonoBehaviour
 {
     public List<GameObject> gameObjectsList; // The list of game objects to place in the grid
+    public List<List<GameObject>> minorGameObjectsList;
     public GameObject buildModeObject; // The game object to use in build mode
     public Tilemap tilemap; // The tilemap component to use as the grid
     public Grid grid;
@@ -34,11 +35,13 @@ public class BuildModeEnabler : MonoBehaviour
     {
         if (isEarseMode)
         {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
             if (Input.GetMouseButtonDown(0))
             {
                 // Cast a ray from the mouse position to the scene
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
 
                 // Check if the ray hits a cell in the grid
                 if (hit.collider != null)
@@ -53,6 +56,29 @@ public class BuildModeEnabler : MonoBehaviour
                             CanBeDestroyedCheck(obj);
                         }
                         gameObjectsList.RemoveRange(targetIndex, count);
+                    }
+                }
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                int targetIndex = gameObjectsList.IndexOf(hit.collider.gameObject);
+                if (targetIndex >= 0)
+                {
+                    List<GameObject> remainingObjects = new List<GameObject>();
+                    for (int i = targetIndex + 1; i < gameObjectsList.Count; i++)
+                    {
+                        remainingObjects.Add(gameObjectsList[i]);
+                    }
+                    gameObjectsList.RemoveRange(targetIndex, gameObjectsList.Count - targetIndex);
+                    for (int i = 0; i < remainingObjects.Count; i++)
+                    {
+                        for(i = 0; ;i++ )
+                        {
+                            if (minorGameObjectsList[i] == null)
+                            {
+                                minorGameObjectsList[i].Add(remainingObjects[i]);
+                            }
+                        }
                     }
                 }
             }

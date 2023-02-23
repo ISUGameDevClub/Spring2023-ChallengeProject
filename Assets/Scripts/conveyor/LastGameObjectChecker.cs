@@ -8,6 +8,7 @@ public class LastGameObjectChecker : MonoBehaviour
     public List<GameObject> gameObjectsList; // The list of game objects to check
     public bool isLastGameObject; // A flag to indicate whether this game object is the last one in the list
     public GameObject boxMover;
+    public int minorListNumber;
 
     void Start()
     {
