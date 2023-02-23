@@ -6,7 +6,8 @@ public class Box : MonoBehaviour
 {
     private float conveyorTime;
     private int conveyorIndex = 0;
-    
+
+
     private void Start()
     {
         conveyorTime = Time.time;
