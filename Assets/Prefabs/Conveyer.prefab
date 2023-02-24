@@ -100,8 +100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBeDestroyed: 1
   gameObjectsList: []
+  isFristGameObject: 0
   isLastGameObject: 0
   boxMover: {fileID: 0}
+  minorList: []
+  minorListNumber: -1
 --- !u!61 &3133405597581237903
 BoxCollider2D:
   m_ObjectHideFlags: 0
