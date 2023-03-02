@@ -21,4 +21,21 @@ public class MoneyManager : MonoBehaviour
     {
         totalMoney += addedMoney;
     }
+
+    public void subtractMoney(float subtractedMoney)
+    {
+        totalMoney -= subtractedMoney;-------------------------------------+
+    }
+
+    public bool checkPrice(float price)
+    {
+        if (price <= totalMoney)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
