@@ -24,7 +24,7 @@ public class MoneyManager : MonoBehaviour
 
     public void subtractMoney(float subtractedMoney)
     {
-        totalMoney -= subtractedMoney;-------------------------------------+
+        totalMoney -= subtractedMoney;
     }
 
     public bool checkPrice(float price)
