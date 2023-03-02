@@ -18,6 +18,7 @@ public class BuildModeEnabler : MonoBehaviour
     private GameObject previewObject; // The preview object shown during drag and drop
     private Vector3 previewOffset; // The offset between the mouse and the preview object's center
     private GameObject gameObjectToPlace; // The game object being placed
+    public GameObject endPointGameObject;
 
 
     public float searchLength;
@@ -29,12 +30,15 @@ public class BuildModeEnabler : MonoBehaviour
 
     private void Start()
     {
+
+
         for (int i = 0; i < 20; i++)
         {
             List<GameObject> temp = new List<GameObject>();
             minorGameObjectsList.Add(temp);
         }
-
+        minorGameObjectsList[0].Add(endPointGameObject);
+        endPointGameObject.GetComponent<LastGameObjectChecker>().minorList = minorGameObjectsList[0];
         gameObjectsList = boxMover.GetComponent<BoxMover>().conveyorList;
     }
 
