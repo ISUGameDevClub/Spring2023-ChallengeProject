@@ -294,6 +294,9 @@ MonoBehaviour:
   endPointGameObject: {fileID: 1944762829}
   searchLength: 0.8
   lastGameObjectclickd: {fileID: 0}
+  moneyManager: {fileID: 978367192}
+  priceOfCon: 1
+  returnPriceOfCon: 1
 --- !u!156049354 &253946934
 Grid:
   m_ObjectHideFlags: 0
@@ -724,6 +727,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6899899033019187067, guid: b08addfbffcca034aa198be8ab342477, type: 3}
+      propertyPath: totalMoney
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899899033019187067, guid: b08addfbffcca034aa198be8ab342477, type: 3}
+      propertyPath: startingCash
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 7837341691588878039, guid: b08addfbffcca034aa198be8ab342477, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -770,25 +781,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b08addfbffcca034aa198be8ab342477, type: 3}
---- !u!1 &978367188 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2161001665295160170, guid: b08addfbffcca034aa198be8ab342477, type: 3}
+--- !u!114 &978367192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6899899033019187067, guid: b08addfbffcca034aa198be8ab342477, type: 3}
   m_PrefabInstance: {fileID: 978367187}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &978367189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978367188}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c77e28472d49223469a964c9ce9678d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalMoney: 0
-  startingCash: 500
 --- !u!1001 &992266620
 PrefabInstance:
   m_ObjectHideFlags: 0
