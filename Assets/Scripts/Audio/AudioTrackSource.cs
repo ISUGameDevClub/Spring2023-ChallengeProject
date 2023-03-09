@@ -54,5 +54,7 @@ public class AudioTrackSource : MonoBehaviour
         }
 
         fadeRoutines[trackIndex] = StartCoroutine(audioTracks[trackIndex].FadeTrack(volume, fadeDurration));
+    
+        Debug.Log("SetVolume: " + trackIndex + " " + volume);
     }
 }

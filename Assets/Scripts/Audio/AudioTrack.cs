@@ -8,7 +8,7 @@ public class AudioTrack
     [SerializeField]
     private AudioClip clip;
     [SerializeField]
-    private float maxVolume;
+    private float maxVolume = 1f;
 
     private AudioSource source;
 
@@ -23,7 +23,7 @@ public class AudioTrack
         }
 
         source = hostObject.AddComponent<AudioSource>();
-        source.hideFlags = HideFlags.HideInInspector;
+        // source.hideFlags = HideFlags.HideInInspector;
         source.clip = clip;
         source.volume = 0f;
         source.loop = true;
