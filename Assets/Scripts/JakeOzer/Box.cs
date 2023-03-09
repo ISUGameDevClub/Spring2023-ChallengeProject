@@ -24,4 +24,15 @@ public class Box : MonoBehaviour
         conveyorIndex++;
         conveyorTime = Time.time;
     }
+
+    public void packBox()
+    {
+       while (boxFill < boxFillMax)
+        {
+            Debug.Log("Box getting packed");
+            boxFill++;
+        }
+
+        Destroy(gameObject);
+    }
 }

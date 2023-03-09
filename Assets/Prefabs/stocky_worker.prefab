@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 534743362409023980}
   - component: {fileID: 534743362409023983}
   - component: {fileID: 534743362409023982}
+  - component: {fileID: 9184536597774237580}
   m_Layer: 0
   m_Name: stocky_worker
   m_TagString: Untagged
@@ -111,3 +112,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7306261, y: 0.69346446}
   m_EdgeRadius: 0
+--- !u!114 &9184536597774237580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534743362409023977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70711380eb963bc44ab346426298b189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRadius: 2
