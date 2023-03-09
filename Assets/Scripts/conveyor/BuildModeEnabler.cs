@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BuildModeEnabler : MonoBehaviour
 {
     public List<GameObject> gameObjectsList; // The list of game objects to place in the grid
+    public List<List<GameObject>> minorGameObjectsList = new List<List<GameObject>>();
     public GameObject buildModeObject; // The game object to use in build mode
     public Tilemap tilemap; // The tilemap component to use as the grid
     public Grid grid;
@@ -17,16 +18,33 @@ public class BuildModeEnabler : MonoBehaviour
     private GameObject previewObject; // The preview object shown during drag and drop
     private Vector3 previewOffset; // The offset between the mouse and the preview object's center
     private GameObject gameObjectToPlace; // The game object being placed
+    public GameObject endPointGameObject;
 
 
     public float searchLength;
     private bool made = false;
-    private GameObject lastGameObjectclickd;
+    private bool combined = false;
+    public GameObject lastGameObjectclickd;
+
+    public MoneyManager moneyManager;
+    public float priceOfCon = 1f;
+    public float returnPriceOfCon = 1f;
 
 
 
     private void Start()
     {
+
+
+        for (int i = 0; i < 20; i++)
+        {
+            List<GameObject> temp = new List<GameObject>();
+            minorGameObjectsList.Add(temp);
+        }
+        minorGameObjectsList[0].Add(endPointGameObject);
+        endPointGameObject.GetComponent<LastGameObjectChecker>().minorList = minorGameObjectsList[0];
+        endPointGameObject.GetComponent<LastGameObjectChecker>().minorListNumber = 0;
+
         gameObjectsList = boxMover.GetComponent<BoxMover>().conveyorList;
     }
 
@@ -34,12 +52,11 @@ public class BuildModeEnabler : MonoBehaviour
     {
         if (isEarseMode)
         {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
             if (Input.GetMouseButtonDown(0))
             {
-                // Cast a ray from the mouse position to the scene
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-
                 // Check if the ray hits a cell in the grid
                 if (hit.collider != null)
                 {
@@ -49,10 +66,61 @@ public class BuildModeEnabler : MonoBehaviour
                         int count = gameObjectsList.Count - targetIndex;
                         for (int i = 0; i < count; i++)
                         {
-                            GameObject obj = gameObjectsList[targetIndex + i];
+                            GameObject obj = gameObjectsList[targetIndex];
                             CanBeDestroyedCheck(obj);
                         }
-                        gameObjectsList.RemoveRange(targetIndex, count);
+                    }
+                }
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                if (hit.collider != null)
+                {
+                    List<GameObject> tempList = ReturnList(hit.collider.gameObject);
+
+                    int targetIndex = tempList.IndexOf(hit.collider.gameObject);
+                    if (targetIndex >= 0)
+                    {
+                        int count = tempList.Count - targetIndex;
+                        for (int i = 0; i < count; i++)
+                        {
+                            GameObject obj = tempList[targetIndex];
+                            CanBeDestroyedCheck(obj);
+                        }
+                    }
+                }
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (hit.collider != null)
+                {
+                    int empty = -1;
+                    for (int i = 0; empty == -1; i++)
+                    {
+                        Debug.Log(minorGameObjectsList[i].Count);
+                        if (minorGameObjectsList[i].Count == 0)
+                        {
+                            empty = i;
+                        }
+                    }
+
+                    List<GameObject> tempList = ReturnList(hit.collider.gameObject);
+
+
+                    int targetIndex = tempList.IndexOf(hit.collider.gameObject);
+                    if (targetIndex >= 0)
+                    {
+                        List<GameObject> remainingObjects = new List<GameObject>();
+                        for (int i = targetIndex + 1; i < tempList.Count; i++)
+                        {
+                            minorGameObjectsList[empty].Add(tempList[i]);
+                            LastGameObjectChecker tempLGOC = tempList[i].GetComponent<LastGameObjectChecker>();
+                            tempLGOC.minorList = minorGameObjectsList[empty];
+                            tempLGOC.minorListNumber = empty;
+                        }
+                        tempList.RemoveRange(targetIndex, tempList.Count - targetIndex);
+                        CanBeDestroyedCheck(hit.collider.gameObject);
                     }
                 }
             }
@@ -60,63 +128,71 @@ public class BuildModeEnabler : MonoBehaviour
 
         if (isBuildMode)
         {
+            // Cast a ray from the mouse position to the scene
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
             // Check if the left mouse button is down
             if (Input.GetMouseButtonDown(0))
             {
-                // Cast a ray from the mouse position to the scene
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-
                 // Check if the ray hits a cell in the grid
                 if (hit.collider != null && hit.transform.gameObject.GetComponent<LastGameObjectChecker>().isLastGameObject)
                 {
-                    Debug.Log("test 2");
-
                     lastGameObjectclickd = hit.transform.gameObject;
 
                     MakeCon(hit);
                 }
             }
             // Check if the left mouse button is held down
-            else if (Input.GetMouseButton(0) && previewObject != null)
+            else if (Input.GetMouseButton(0) && previewObject != null && !combined)
             {
 
                 // Move the preview object to the mouse position
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Vector3 previewObjectTempPos = GetWorldPosition(GetNeighborCell(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) + previewOffset;
 
-                previewObject.transform.position = GetWorldPosition(GetNeighborCell(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) + previewOffset;
-
-                RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-                Debug.Log(hit.collider);
-
-                if (hit.collider == null && !OverlapCheck(previewObject.transform.position) && made == false)
+                if (IsInCameraView(previewObjectTempPos))
                 {
-                    Debug.Log("test 4  " + OverlapCheck(previewObject.transform.position) + "    " + previewObject.transform.position) ;
+                    previewObject.transform.position = previewObjectTempPos;
+                }else
+                {
+                    previewObject.transform.position = lastGameObjectclickd.transform.position;
+                }
 
-                    lastGameObjectclickd = previewObject;
+                if (OverlapEndCheck(previewObject.transform.position) > -1)
+                {
+                    CombineLists();
+                    combined = true;
+                }
+                // Debug.Log(hit.collider);
+
+                if (hit.collider == null && !OverlapCheck(previewObject.transform.position) && made == false && moneyManager.checkPrice(priceOfCon))
+                {
+                    //Debug.Log("test 4  " + OverlapCheck(previewObject.transform.position) + "    " + previewObject.transform.position) ;
+
                     SaveCon();
                     MakeCon(hit);
                     made = true;
                 }
                 else
                 {
-                    if (hit.collider != null && Vector2.Distance(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) > (gridSize ) * searchLength)
+                    if (Vector2.Distance(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) > (gridSize) * searchLength)
                     {
                         made = false;
-                    } else if (Vector2.Distance(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition) ) > (gridSize + gridSize) * searchLength && !OverlapCheck(previewObject.transform.position))
+                    }
+                    else if (Vector2.Distance(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) > (gridSize + gridSize) * searchLength && !OverlapCheck(previewObject.transform.position) && moneyManager.checkPrice(priceOfCon))
                     {
-                        lastGameObjectclickd = previewObject;
                         SaveCon();
                         MakeCon(hit);
                         made = true;
                     }
                 }
-                
-                if(OverlapCheck(previewObject.transform.position) && GetClosestCellCenter(previewObject.transform.position) != GetClosestCellCenter(lastGameObjectclickd.transform.position))
+
+                if (OverlapCheck(previewObject.transform.position) && GetClosestCellCenter(previewObject.transform.position) != GetClosestCellCenter(lastGameObjectclickd.transform.position))
                 {
                     previewObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 0.5f);
 
-                } else
+                }
+                else
                 {
                     previewObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
 
@@ -125,10 +201,10 @@ public class BuildModeEnabler : MonoBehaviour
             // Check if the left mouse button is released
             else if (Input.GetMouseButtonUp(0) && previewObject != null)
             {
-                Debug.Log("test 5");
+                // Debug.Log("test 5");
 
 
-                if (GetClosestCellCenter(previewObject.transform.position) != GetClosestCellCenter(lastGameObjectclickd.transform.position) && !OverlapCheck(previewObject.transform.position))
+                if (GetClosestCellCenter(previewObject.transform.position) != GetClosestCellCenter(lastGameObjectclickd.transform.position) && !OverlapCheck(previewObject.transform.position) && moneyManager.checkPrice(priceOfCon))
                 {
                     SaveCon();
                 }
@@ -137,14 +213,15 @@ public class BuildModeEnabler : MonoBehaviour
                     CanBeDestroyedCheck(previewObject);
                 }
             }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                combined = false;
 
+            }
 
 
         }
-
-
     }
-
     public Vector2 GetClosestCellCenter(Vector2 position)
     {
         Vector3Int cellPosition = grid.WorldToCell(position);
@@ -218,8 +295,13 @@ public class BuildModeEnabler : MonoBehaviour
 
     public void SaveCon()
     {
+        moneyManager.addMoney(-priceOfCon);
         previewObject.GetComponent<SpriteRenderer>().color = new Color(99f, 99f, 99f, 225f);
-        gameObjectsList.Add(previewObject);
+        ReturnList(lastGameObjectclickd).Add(previewObject);
+        LastGameObjectChecker lGOC = previewObject.GetComponent<LastGameObjectChecker>();
+        lGOC.minorList = ReturnList(lastGameObjectclickd);
+        lGOC.minorListNumber = lastGameObjectclickd.GetComponent<LastGameObjectChecker>().minorListNumber;
+        lastGameObjectclickd = previewObject;
         previewObject = null;
     }
 
@@ -227,8 +309,9 @@ public class BuildModeEnabler : MonoBehaviour
     {
         // Create a preview object at the hit point
         previewObject = Instantiate(buildModeObject, hit.point, Quaternion.identity);
-        previewObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
         previewOffset = new Vector2(previewObject.transform.position.x, previewObject.transform.position.y) - hit.point;
+        previewObject.transform.position = GetWorldPosition(GetNeighborCell(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) + previewOffset;
+        previewObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
     }
 
     public bool OverlapCheck(Vector3 spaceToTest)
@@ -241,17 +324,117 @@ public class BuildModeEnabler : MonoBehaviour
             }
         }
 
+        foreach(List<GameObject> templist in minorGameObjectsList)
+        {
+            if(templist.Count > 0)
+            {
+                foreach (GameObject temp in templist)
+                {
+                    if (GetClosestCellCenter(spaceToTest) == GetClosestCellCenter(temp.transform.position))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
         return false;
     }
 
+    public int OverlapEndCheck(Vector3 spaceToTest)
+    {
+        int i = 0;
+        foreach (List<GameObject> templist in minorGameObjectsList)
+        {
+            if (templist.Count > 0)
+            {          
+                if (GetClosestCellCenter(spaceToTest) == GetClosestCellCenter(templist[0].transform.position))
+                {
+                    return i;
+                }
+            }
+            i++;
+        } 
+            return -1;
+    }
+
+
     public void CanBeDestroyedCheck(GameObject temp)
     {
-        if (temp.GetComponent<LastGameObjectChecker>().canBeDestroyed)
+        LastGameObjectChecker lGOC = temp.GetComponent<LastGameObjectChecker>();
+
+        if (lGOC.canBeDestroyed)
         {
-            Destroy(temp);
+            if (lGOC.minorListNumber != -1)
+            {
+                minorGameObjectsList[lGOC.minorListNumber].Remove(temp);
+
+                Destroy(temp);
+                moneyManager.addMoney(returnPriceOfCon);
+            }
+            else if(gameObjectsList.IndexOf(temp) != -1)
+            {
+                gameObjectsList.Remove(temp);
+
+                Destroy(temp);
+                moneyManager.addMoney(returnPriceOfCon);
+            }
+            else
+            {
+                Destroy(temp);
+                moneyManager.addMoney(returnPriceOfCon);
+            }
         }
+
+    }
+
+    bool IsInCameraView(Vector2 point)
+    {
+        Camera mainCamera = Camera.main;
+
+        Vector2 cameraPosition = mainCamera.transform.position;
+        Vector2 cameraSize = new Vector2(mainCamera.orthographicSize * mainCamera.aspect, mainCamera.orthographicSize);
+
+        Rect cameraViewRect = new Rect(cameraPosition - cameraSize, cameraSize * 2f);
+
+        return cameraViewRect.Contains(point);
+    }
+
+    public List<GameObject> ReturnList(GameObject temp)
+    {
+        List<GameObject> tempList = gameObjectsList;
+
+        LastGameObjectChecker lGOC = temp.GetComponent<LastGameObjectChecker>().GetComponent<LastGameObjectChecker>();
+
+        if (lGOC.minorListNumber != -1)
+        {
+            tempList = minorGameObjectsList[lGOC.minorListNumber];
+
+        }
+        return tempList;
+
+    }
+
+    public void CombineLists()
+    {
+        int listNum = OverlapEndCheck(previewObject.transform.position);
+
+        int newListNum = lastGameObjectclickd.GetComponent<LastGameObjectChecker>().minorListNumber;
+
+        foreach (GameObject temp in minorGameObjectsList[listNum])
+        {
+            LastGameObjectChecker tempLGOC = temp.GetComponent<LastGameObjectChecker>();
+                
+                tempLGOC.minorListNumber = newListNum;
+        }
+
+        ReturnList(lastGameObjectclickd).AddRange(minorGameObjectsList[listNum]);
+        minorGameObjectsList[listNum] = new List<GameObject>();
+
+        CanBeDestroyedCheck(previewObject);    
     }
 }
+
 
 
 
