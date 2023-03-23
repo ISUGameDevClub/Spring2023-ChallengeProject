@@ -124,4 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70711380eb963bc44ab346426298b189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRadius: 2
+  sightRadius: 1.44
+  packRate: 15

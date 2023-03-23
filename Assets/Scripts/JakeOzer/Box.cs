@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Box : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Box : MonoBehaviour
     private int conveyorIndex = 0;
     private float boxFill = 0;
     private float boxFillMax = 100;
+    [SerializeField] private FillBar fillBar;
 
 
     private void Start()
@@ -18,6 +20,7 @@ public class Box : MonoBehaviour
     public float GetConveyorTime() => conveyorTime;
     public int GetConveyorIndex() => conveyorIndex;
     public float GetBoxFill() => boxFill;
+    public float GetBoxFillMax() => boxFillMax;
 
     public void NextConveyor()
     {
@@ -25,14 +28,18 @@ public class Box : MonoBehaviour
         conveyorTime = Time.time;
     }
 
-    public void packBox()
+    public void PackBox(float amount)
     {
-       while (boxFill < boxFillMax)
+        fillBar.transform.GetChild(0).gameObject.SetActive(true);
+        fillBar.transform.GetChild(1).gameObject.SetActive(true);
+
+        boxFill += amount;
+        fillBar.FillBoxBar(boxFill);
+        if (boxFill >= boxFillMax)
         {
-            Debug.Log("Box getting packed");
-            boxFill++;
+            Debug.Log("Box is filled.");
         }
 
-        Destroy(gameObject);
     }
+
 }

@@ -6,7 +6,8 @@ using UnityEngine;
 public class Worker : MonoBehaviour
 {
     public float sightRadius = 4f;
-    Collider2D[] boxesTouched;
+    public float packRate = 1f;
+    Collider2D[] colliders;
     private LayerMask boxLayerMask;
 
     private void Start()
@@ -16,15 +17,20 @@ public class Worker : MonoBehaviour
 
     private void Update()
     {
-        boxesTouched = Physics2D.OverlapCircleAll(transform.position, sightRadius, boxLayerMask);
+        colliders = Physics2D.OverlapCircleAll(transform.position, sightRadius);
         
 
 
-        foreach(Collider2D boxCol in boxesTouched)
+        foreach(Collider2D col in colliders)
         {
-            Debug.Log("Collider of " + boxCol.name+" overlapping with circle") ;
+            if (col.TryGetComponent<Box>(out Box box))
+            {
+                Debug.Log("Collider of " + col.name + " overlapping with circle");
+                col.gameObject.GetComponent<Box>().PackBox(Time.deltaTime * packRate);
+            }
 
-            //boxCol.gameObject.GetComponent<Box>().packBox();
+
+            
         }
 
     }
@@ -35,4 +41,3 @@ public class Worker : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sightRadius);
     }
 }
-//do this with triggers i guess
