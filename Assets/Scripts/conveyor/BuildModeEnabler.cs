@@ -18,6 +18,7 @@ public class BuildModeEnabler : MonoBehaviour
     private GameObject previewObject; // The preview object shown during drag and drop
     private Vector3 previewOffset; // The offset between the mouse and the preview object's center
     private GameObject gameObjectToPlace; // The game object being placed
+    public GameObject endPointGameObject;
 
 
     public float searchLength;
@@ -25,15 +26,24 @@ public class BuildModeEnabler : MonoBehaviour
     private bool combined = false;
     public GameObject lastGameObjectclickd;
 
+    public MoneyManager moneyManager;
+    public float priceOfCon = 1f;
+    public float returnPriceOfCon = 1f;
+
 
 
     private void Start()
     {
+
+
         for (int i = 0; i < 20; i++)
         {
             List<GameObject> temp = new List<GameObject>();
             minorGameObjectsList.Add(temp);
         }
+        minorGameObjectsList[0].Add(endPointGameObject);
+        endPointGameObject.GetComponent<LastGameObjectChecker>().minorList = minorGameObjectsList[0];
+        endPointGameObject.GetComponent<LastGameObjectChecker>().minorListNumber = 0;
 
         gameObjectsList = boxMover.GetComponent<BoxMover>().conveyorList;
     }
@@ -155,7 +165,7 @@ public class BuildModeEnabler : MonoBehaviour
                 }
                 // Debug.Log(hit.collider);
 
-                if (hit.collider == null && !OverlapCheck(previewObject.transform.position) && made == false)
+                if (hit.collider == null && !OverlapCheck(previewObject.transform.position) && made == false && moneyManager.checkPrice(priceOfCon))
                 {
                     //Debug.Log("test 4  " + OverlapCheck(previewObject.transform.position) + "    " + previewObject.transform.position) ;
 
@@ -169,7 +179,7 @@ public class BuildModeEnabler : MonoBehaviour
                     {
                         made = false;
                     }
-                    else if (Vector2.Distance(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) > (gridSize + gridSize) * searchLength && !OverlapCheck(previewObject.transform.position))
+                    else if (Vector2.Distance(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) > (gridSize + gridSize) * searchLength && !OverlapCheck(previewObject.transform.position) && moneyManager.checkPrice(priceOfCon))
                     {
                         SaveCon();
                         MakeCon(hit);
@@ -194,7 +204,7 @@ public class BuildModeEnabler : MonoBehaviour
                 // Debug.Log("test 5");
 
 
-                if (GetClosestCellCenter(previewObject.transform.position) != GetClosestCellCenter(lastGameObjectclickd.transform.position) && !OverlapCheck(previewObject.transform.position))
+                if (GetClosestCellCenter(previewObject.transform.position) != GetClosestCellCenter(lastGameObjectclickd.transform.position) && !OverlapCheck(previewObject.transform.position) && moneyManager.checkPrice(priceOfCon))
                 {
                     SaveCon();
                 }
@@ -285,6 +295,7 @@ public class BuildModeEnabler : MonoBehaviour
 
     public void SaveCon()
     {
+        moneyManager.addMoney(-priceOfCon);
         previewObject.GetComponent<SpriteRenderer>().color = new Color(99f, 99f, 99f, 225f);
         ReturnList(lastGameObjectclickd).Add(previewObject);
         LastGameObjectChecker lGOC = previewObject.GetComponent<LastGameObjectChecker>();
@@ -359,16 +370,19 @@ public class BuildModeEnabler : MonoBehaviour
                 minorGameObjectsList[lGOC.minorListNumber].Remove(temp);
 
                 Destroy(temp);
+                moneyManager.addMoney(returnPriceOfCon);
             }
             else if(gameObjectsList.IndexOf(temp) != -1)
             {
                 gameObjectsList.Remove(temp);
 
                 Destroy(temp);
+                moneyManager.addMoney(returnPriceOfCon);
             }
             else
             {
                 Destroy(temp);
+                moneyManager.addMoney(returnPriceOfCon);
             }
         }
 

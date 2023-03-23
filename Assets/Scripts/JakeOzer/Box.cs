@@ -9,6 +9,7 @@ public class Box : MonoBehaviour
     private float boxFill = 0;
     private float boxFillMax = 100;
 
+
     private void Start()
     {
         conveyorTime = Time.time;
