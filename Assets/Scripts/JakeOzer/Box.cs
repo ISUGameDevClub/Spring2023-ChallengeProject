@@ -8,6 +8,7 @@ public class Box : MonoBehaviour
     private int conveyorIndex = 0;
     private float boxFill = 0;
     private float boxFillMax = 100;
+    public float speed;
 
 
     private void Start()

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
-    [SerializeField] private float totalMoney;
-    [SerializeField] private float startingCash;
+    [SerializeField] public float totalMoney;
+    [SerializeField] public float startingCash;
 
     private void Start()
     {
