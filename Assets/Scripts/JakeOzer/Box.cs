@@ -9,6 +9,7 @@ public class Box : MonoBehaviour
     private int conveyorIndex = 0;
     private float boxFill = 0;
     private float boxFillMax = 100;
+    private bool isPacked = false;
     [SerializeField] private FillBar fillBar;
 
 
@@ -21,6 +22,7 @@ public class Box : MonoBehaviour
     public int GetConveyorIndex() => conveyorIndex;
     public float GetBoxFill() => boxFill;
     public float GetBoxFillMax() => boxFillMax;
+    public bool IsPacked() => isPacked;
 
     public void NextConveyor()
     {
@@ -37,7 +39,8 @@ public class Box : MonoBehaviour
         fillBar.FillBoxBar(boxFill);
         if (boxFill >= boxFillMax)
         {
-            Debug.Log("Box is filled.");
+            //Debug.Log("Box is filled.");
+            isPacked = true;
         }
 
     }
