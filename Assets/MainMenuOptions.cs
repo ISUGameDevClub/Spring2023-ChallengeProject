@@ -6,19 +6,21 @@ using UnityEngine.SceneManagement;
 public class MainMenuOptions : MonoBehaviour
 {
     public void StartGameButton() {
-        //Debug.Log("prints");
         SceneManager.LoadScene(1);
     }
 
     public void QuitGameButton()
     {
-        //Debug.Log("prints");
         Application.Quit();
     }
 
     public void OptionsButton()
     {
-        //Debug.Log("prints");
         SceneManager.LoadScene(2);
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }

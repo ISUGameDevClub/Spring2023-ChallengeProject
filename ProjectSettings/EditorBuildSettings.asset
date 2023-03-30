@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Dakota's Scenes/Test.unity
+    path: Assets/Scenes/Dakota's Scenes/Main Menu.unity
     guid: 215e0389620a198449a77c30f2a08b41
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
