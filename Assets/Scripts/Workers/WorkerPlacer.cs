@@ -7,22 +7,15 @@ public class WorkerPlacer : MonoBehaviour
 {
     [SerializeField] private GameObject worker;
     [SerializeField] private GameObject ghostWorker;
-    private UIBottomPanelController bottomPanelController;
     private GameObject tempWorker;
     private bool isPlacing = false;
 
     Vector2 mousePos;
 
-    private void Start()
-    {
-        bottomPanelController = FindObjectOfType<UIBottomPanelController>();
-    }
-
     public void StartPlacing()
     {
         isPlacing = true;
         tempWorker = Instantiate(ghostWorker, mousePos, Quaternion.identity);
-        bottomPanelController.Toggle();
     }
 
     private void Update()
@@ -36,9 +29,8 @@ public class WorkerPlacer : MonoBehaviour
             Destroy(tempWorker);
             Instantiate(worker, mousePos, Quaternion.identity);
             isPlacing = false;
-            bottomPanelController.Toggle();
         }
     }
 }
 
-//maybe need to make it so when placing, the ui slider goes down
+//RAYCASTING NEEDED TO CHECK IF HITTING SOMETHING NOT INTENDED
