@@ -7,8 +7,12 @@ public class Box : MonoBehaviour
 {
     private float conveyorTime;
     private int conveyorIndex = 0;
-    private float boxFill = 0;
-    private float boxFillMax = 100;
+    public float boxFill { get; private set; } = 0;
+    public float boxFillMax { get; private set; } = 100;
+    public float speed;
+
+    public float value;
+
     private bool isPacked = false;
     [SerializeField] private FillBar fillBar;
 
