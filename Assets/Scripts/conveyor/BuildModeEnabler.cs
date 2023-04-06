@@ -435,6 +435,17 @@ public class BuildModeEnabler : MonoBehaviour
 
         CanBeDestroyedCheck(previewObject);    
     }
+
+    public void SetBuildMode(bool Enable)
+    {
+        isBuildMode = Enable;
+        isEarseMode = false;
+    }
+    public void SetEraseMode(bool Enable)
+    {
+        isEarseMode = Enable;
+        isBuildMode = false;
+    }
 }
 
 
