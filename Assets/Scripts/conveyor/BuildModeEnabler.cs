@@ -135,8 +135,6 @@ public class BuildModeEnabler : MonoBehaviour
             // Check if the left mouse button is down
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("click" + hit);
-
                 // Check if the ray hits a cell in the grid
                 if (hit.collider != null && hit.transform.gameObject.GetComponent<LastGameObjectChecker>().isLastGameObject)
                 {

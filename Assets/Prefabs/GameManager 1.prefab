@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5091115196266171681}
   - component: {fileID: 8400359371187331460}
-  - component: {fileID: 2427123456452100499}
   m_Layer: 0
   m_Name: GameManager 1
   m_TagString: Untagged
@@ -47,19 +46,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalMoney: 0
   startingCash: 0
---- !u!114 &2427123456452100499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115089752437074547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a6e60c505cfdf47af6d6df919f84ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BME: {fileID: 0}
-  boxSpawner: {fileID: 0}
-  currentRound: 0
-  isPlaying: 0
