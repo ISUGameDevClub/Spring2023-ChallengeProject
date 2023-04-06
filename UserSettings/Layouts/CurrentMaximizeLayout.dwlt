@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 3}
-  - {fileID: 12}
+  - {fileID: 14}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1920
-    height: 947
+    width: 1536
+    height: 722.8
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   controlID: 1077
@@ -33,6 +34,9 @@ MonoBehaviour:
 =======
   controlID: 12704
 >>>>>>> origin/JakeOzer
+=======
+  controlID: 12704
+>>>>>>> Paul's
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -42,17 +46,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 1
-  m_Script: {fileID: 12003, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
+  m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Console
-    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
+    m_Text: Game
+    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     x: 290.4
@@ -71,11 +76,20 @@ MonoBehaviour:
     width: 1084.3999
     height: 559
 >>>>>>> origin/JakeOzer
+=======
+    x: 208.8
+    y: 73.6
+    width: 1084.3999
+    height: 559
+>>>>>>> Paul's
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Paul's
   m_SerializedViewNames: []
   m_SerializedViewValues: []
   m_PlayModeViewName: GameView
@@ -157,8 +171,11 @@ MonoBehaviour:
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
+<<<<<<< HEAD
 =======
 >>>>>>> origin/Paul's
+=======
+>>>>>>> Paul's
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -180,14 +197,18 @@ MonoBehaviour:
     y: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 1172
 =======
+=======
+>>>>>>> Paul's
     width: 1295.2
 >>>>>>> origin/JakeOzer
     height: 722.8
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
+<<<<<<< HEAD
 <<<<<<< HEAD
   controlID: 1078
 =======
@@ -201,6 +222,9 @@ MonoBehaviour:
 =======
   controlID: 12705
 >>>>>>> origin/JakeOzer
+=======
+  controlID: 12705
+>>>>>>> Paul's
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,6 +244,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     width: 1172
@@ -244,6 +269,14 @@ MonoBehaviour:
   vertical: 0
   controlID: 12706
 >>>>>>> origin/JakeOzer
+=======
+    width: 1295.2
+    height: 580
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 12706
+>>>>>>> Paul's
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -263,6 +296,7 @@ MonoBehaviour:
     y: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 290.4
     height: 428
   m_MinSize: {x: 201, y: 221}
@@ -279,6 +313,12 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
 >>>>>>> origin/JakeOzer
+=======
+    width: 208.8
+    height: 580
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+>>>>>>> Paul's
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -300,11 +340,12 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Hierarchy
-    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -3734745235275155857, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
     y: 73
     width: 298
@@ -314,6 +355,11 @@ MonoBehaviour:
     width: 207.8
     height: 559
 >>>>>>> origin/JakeOzer
+=======
+    y: 73.6
+    width: 207.8
+    height: 559
+>>>>>>> Paul's
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -321,6 +367,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
       m_SelectedIDs: 
       m_LastClickedID: 0
@@ -334,6 +381,11 @@ MonoBehaviour:
 =======
       m_ExpandedIDs: b6faffffbefaffff2afbffff
 >>>>>>> origin/JakeOzer
+=======
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: b6faffffbefaffff2afbffff
+>>>>>>> Paul's
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -373,6 +425,7 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 299
     y: 0
 <<<<<<< HEAD
@@ -385,15 +438,23 @@ MonoBehaviour:
     width: 1114
     height: 544
 =======
+=======
+>>>>>>> Paul's
     x: 208.8
     y: 0
     width: 1086.3999
     height: 580
+<<<<<<< HEAD
 >>>>>>> origin/JakeOzer
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 8}
 >>>>>>> origin/Paul's
+=======
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 2}
+>>>>>>> Paul's
   m_Panes:
   - {fileID: 8}
   - {fileID: 9}
@@ -409,98 +470,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 1
-  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Game
-    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 299
-    y: 73
-    width: 1112
-    height: 523
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-  m_SerializedViewNames: []
-  m_SerializedViewValues: []
-  m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
-  m_TargetDisplay: 0
-  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1112, y: 502}
-  m_TextureFilterMode: 0
-  m_TextureHideFlags: 61
-  m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 0
-  m_UseMipMap: 0
-  m_VSyncEnabled: 0
-  m_Gizmos: 0
-  m_Stats: 0
-  m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-  m_ZoomArea:
-    m_HRangeLocked: 0
-    m_VRangeLocked: 0
-    hZoomLockedByDefault: 0
-    vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -556
-    m_HBaseRangeMax: 556
-    m_VBaseRangeMin: -251
-    m_VBaseRangeMax: 251
-    m_HAllowExceedBaseRangeMin: 1
-    m_HAllowExceedBaseRangeMax: 1
-    m_VAllowExceedBaseRangeMin: 1
-    m_VAllowExceedBaseRangeMax: 1
-    m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
-    m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
-    m_EnableSliderZoomHorizontal: 0
-    m_EnableSliderZoomVertical: 0
-    m_UniformScale: 1
-    m_UpDirection: 1
-    m_DrawArea:
-      serializedVersion: 2
-      x: 0
-      y: 21
-      width: 1112
-      height: 502
-    m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 556, y: 251}
-    m_MarginLeft: 0
-    m_MarginRight: 0
-    m_MarginTop: 0
-    m_MarginBottom: 0
-    m_LastShownAreaInsideMargins:
-      serializedVersion: 2
-      x: -556
-      y: -251
-      width: 1112
-      height: 502
-    m_MinimalGUI: 1
-  m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1112, y: 523}
-  m_ClearInEditMode: 1
-  m_NoCameraWarning: 1
-  m_LowResolutionForAspectRatios: 01000000000000000000
-  m_XRRenderMode: 0
-  m_RenderTexture: {fileID: 0}
---- !u!114 &9
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
   m_Script: {fileID: 12013, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -508,27 +477,33 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Scene
-    m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 8634526014445323508, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     x: 290.4
     y: 73.6
     width: 879.6
 =======
+=======
+>>>>>>> Paul's
     x: 260
     y: 73.6
     width: 910.80005
 >>>>>>> origin/JakeOzer
     height: 407
+<<<<<<< HEAD
 =======
     x: 299
     y: 73
     width: 1112
     height: 523
 >>>>>>> origin/Paul's
+=======
+>>>>>>> Paul's
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -538,12 +513,17 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
+<<<<<<< HEAD
       snapOffset: {x: 0, y: 0}
 <<<<<<< HEAD
       snapOffsetDelta: {x: -100, y: -25.600006}
 =======
       snapOffsetDelta: {x: -101, y: -26}
 >>>>>>> origin/Paul's
+=======
+      snapOffset: {x: -100, y: -25.600006}
+      snapOffsetDelta: {x: 0, y: 0}
+>>>>>>> Paul's
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -564,7 +544,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 24.8}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-scene-view-toolbar
@@ -583,16 +563,20 @@ MonoBehaviour:
       layout: 1
     - dockPosition: 0
       containerId: overlay-container--left
-      floating: 1
+      floating: 0
       collapsed: 0
       displayed: 1
+<<<<<<< HEAD
 <<<<<<< HEAD
       snapOffset: {x: 0, y: 0}
 =======
       snapOffset: {x: 2, y: 28}
 >>>>>>> origin/Paul's
+=======
+      snapOffset: {x: 13, y: -171.2}
+>>>>>>> Paul's
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 0
+      snapCorner: 2
       id: unity-transform-toolbar
       index: 0
       layout: 2
@@ -765,8 +749,8 @@ MonoBehaviour:
       containerId: overlay-toolbar__top
       floating: 0
       collapsed: 0
-      displayed: 1
-      snapOffset: {x: 0, y: 25}
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Open Tile Palette
@@ -795,6 +779,7 @@ MonoBehaviour:
   m_Position:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: 0, y: -2.8274686, z: 0}
     speed: 2
     m_Value: {x: 0, y: -2.8274686, z: 0}
@@ -808,6 +793,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 1.5450739, y: -2.167091, z: -4.322746}
 >>>>>>> origin/JakeOzer
+=======
+    m_Target: {x: 1.5450739, y: -2.167091, z: -4.322746}
+    speed: 2
+    m_Value: {x: 1.5450739, y: -2.167091, z: -4.322746}
+>>>>>>> Paul's
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -860,6 +850,7 @@ MonoBehaviour:
   m_Size:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: 10
     speed: 2
     m_Value: 10
@@ -873,6 +864,11 @@ MonoBehaviour:
     speed: 2
     m_Value: 5.2022724
 >>>>>>> origin/JakeOzer
+=======
+    m_Target: 5.2022724
+    speed: 2
+    m_Value: 5.2022724
+>>>>>>> Paul's
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -898,6 +894,9 @@ MonoBehaviour:
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Paul's
 --- !u!114 &9
 <<<<<<< HEAD
 =======
@@ -936,7 +935,10 @@ MonoBehaviour:
   m_SelectedObject: {fileID: 0}
   m_SelectedSpriteRectGUID: 00000000000000000000000000000000
   m_LastUsedModuleTypeName: 
+<<<<<<< HEAD
 >>>>>>> origin/JakeOzer
+=======
+>>>>>>> Paul's
 --- !u!114 &10
 >>>>>>> origin/Paul's
 MonoBehaviour:
@@ -954,6 +956,7 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     y: 428
@@ -983,6 +986,8 @@ MonoBehaviour:
 --- !u!114 &11
 >>>>>>> origin/Paul's
 =======
+=======
+>>>>>>> Paul's
     y: 580
     width: 1295.2
     height: 142.79999
@@ -1071,12 +1076,15 @@ MonoBehaviour:
   m_MaxSize: {x: 10000, y: 10000}
   m_TitleContent:
     m_Text: Project
-    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -5179483145760003458, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Paul's
     y: 501.6
 <<<<<<< HEAD
     width: 1171
@@ -1084,11 +1092,14 @@ MonoBehaviour:
     width: 1171.8
 >>>>>>> origin/JakeOzer
     height: 273.8
+<<<<<<< HEAD
 =======
     y: 617
     width: 1412
     height: 382
 >>>>>>> origin/Paul's
+=======
+>>>>>>> Paul's
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1130,10 +1141,11 @@ MonoBehaviour:
   - Assets/Prefabs
 >>>>>>> origin/JakeOzer
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\pseit\OneDrive\Documents\Unity Games\Spring2023-ChallengeProject
+  m_LastProjectPath: C:\Users\jmano\OneDrive\Documents\JakeUnity\Spring2023-ChallengeProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     scrollPos: {x: 0, y: 0}
@@ -1147,11 +1159,16 @@ MonoBehaviour:
     m_ExpandedIDs: 000000003a6000004860000000ca9a3bffffff7f
 >>>>>>> origin/Paul's
 =======
+=======
+>>>>>>> Paul's
     scrollPos: {x: 0, y: 62.200012}
     m_SelectedIDs: d6600000
     m_LastClickedID: 24790
     m_ExpandedIDs: 00000000a8600000aa600000ac600000ae60000000ca9a3b
+<<<<<<< HEAD
 >>>>>>> origin/JakeOzer
+=======
+>>>>>>> Paul's
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1189,6 +1206,7 @@ MonoBehaviour:
     m_LastClickedID: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 000000003a5c00003c5c000000ca9a3b
 =======
     m_ExpandedIDs: 000000003a600000
@@ -1196,6 +1214,9 @@ MonoBehaviour:
 =======
     m_ExpandedIDs: 00000000a8600000aa600000ac600000ae60000000ca9a3b
 >>>>>>> origin/JakeOzer
+=======
+    m_ExpandedIDs: 00000000a8600000aa600000ac600000ae60000000ca9a3b
+>>>>>>> Paul's
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1222,6 +1243,7 @@ MonoBehaviour:
   m_ListAreaState:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 58810000
     m_LastClickedInstanceID: 33112
 =======
@@ -1231,11 +1253,16 @@ MonoBehaviour:
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
 =======
+=======
+>>>>>>> Paul's
     m_SelectedInstanceIDs: 905f0000
     m_LastClickedInstanceID: 24464
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000be6800000000000032660000fe8a0000
+<<<<<<< HEAD
 >>>>>>> origin/JakeOzer
+=======
+>>>>>>> Paul's
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1263,6 +1290,7 @@ MonoBehaviour:
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!114 &11
 MonoBehaviour:
@@ -1295,6 +1323,9 @@ MonoBehaviour:
 =======
 >>>>>>> origin/Paul's
 --- !u!114 &12
+=======
+--- !u!114 &14
+>>>>>>> Paul's
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1311,6 +1342,7 @@ MonoBehaviour:
     serializedVersion: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 1172
     y: 0
     width: 364
@@ -1325,6 +1357,8 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
 =======
+=======
+>>>>>>> Paul's
     x: 1295.2
     y: 0
     width: 240.80005
@@ -1332,12 +1366,15 @@ MonoBehaviour:
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 15}
+<<<<<<< HEAD
 >>>>>>> origin/JakeOzer
+=======
+>>>>>>> Paul's
   m_Panes:
-  - {fileID: 13}
+  - {fileID: 15}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &13
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1353,27 +1390,33 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Inspector
-    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     x: 1172
     y: 73.6
     width: 363
 =======
+=======
+>>>>>>> Paul's
     x: 1295.2001
     y: 73.6
     width: 239.80005
 >>>>>>> origin/JakeOzer
     height: 701.8
+<<<<<<< HEAD
 =======
     x: 1413
     y: 73
     width: 506
     height: 926
 >>>>>>> origin/Paul's
+=======
+>>>>>>> Paul's
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
