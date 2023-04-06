@@ -138,7 +138,7 @@ public class BuildModeEnabler : MonoBehaviour
                 Debug.Log("click" + hit);
 
                 // Check if the ray hits a cell in the grid
-                if (hit.collider != null && hit.transform.gameObject.GetComponent<LastGameObjectChecker>().isLastGameObject)
+                if (hit.collider != null && hit.transform.tag == "Conveyor" && hit.transform.gameObject.GetComponent<LastGameObjectChecker>().isLastGameObject)
                 {
                     lastGameObjectclickd = hit.transform.gameObject;
 
