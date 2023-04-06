@@ -7,7 +7,6 @@ TagManager:
   - BoxMover
   - Box
   - BoxChecker
-  - Conveyor
   layers:
   - Default
   - TransparentFX
