@@ -673,6 +673,7 @@ GameObject:
   - component: {fileID: 782731184}
   - component: {fileID: 782731185}
   - component: {fileID: 782731186}
+  - component: {fileID: 782731187}
   m_Layer: 0
   m_Name: BoxSpawner
   m_TagString: Untagged
@@ -770,6 +771,29 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &782731187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782731183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7a3894ee177334dba02a8ad62214e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hopperDelay: 1
+  boxPrefab: {fileID: 5852457780800707301, guid: 9d89164904e128945967e03e24df304b, type: 3}
+  waves:
+  - time: 1
+    amount: 5
+  - time: 10
+    amount: 5
+  - time: 20
+    amount: 10
+  - time: 40
+    amount: 20
 --- !u!1001 &869752104
 PrefabInstance:
   m_ObjectHideFlags: 0

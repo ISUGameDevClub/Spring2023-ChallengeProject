@@ -17,7 +17,8 @@ public class AudioManager : MonoBehaviour
         audioTrack = GetComponent<AudioTrackSource>();
         PlayTracks();
 
-        FindObjectOfType<BoxSpawner>().OnBoxSpawned += OnBoxCreated;
+        FindObjectOfType<BoxSpawner>().BoxSpawned += OnBoxCreated;
+        FindObjectOfType<BoxHopper>().BoxSpawned += OnBoxCreated;
     }
 
     void OnBoxCreated() {
