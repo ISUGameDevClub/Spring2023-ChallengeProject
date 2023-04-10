@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class BoxSpawner : MonoBehaviour
 {
+    public event Action OnBoxSpawned;
+
     [System.Serializable]
     public class Timeline
     {
@@ -68,6 +71,8 @@ public class BoxSpawner : MonoBehaviour
     {
         Box newBox = Instantiate(boxPrefab, transform.position, Quaternion.identity).GetComponent<Box>();
         boxMover.AddBoxToGameList(newBox);
+        //invoke event
+        OnBoxSpawned?.Invoke();
     }
 
     public void SetTimeline(int timelineIndex)
