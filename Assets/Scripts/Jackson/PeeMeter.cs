@@ -13,12 +13,14 @@ public class PeeMeter : MonoBehaviour
     private GameObject peeMeter;
     private SpriteRenderer spriteRenderer;
 
+    private Vector2 startPos;
+
     [SerializeField]
     private float shakeSpeed;
     [SerializeField]
     private float shakeAmount;
 
-    private Vector2 startingPos;
+    private Vector3 startingPos;
 
     [SerializeField]
     private Sprite pee0;
@@ -89,6 +91,8 @@ public class PeeMeter : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        startPos = gameObject.transform.position;
+        transform.position = new Vector3(1000, 1000, 1000);
 
         StartCoroutine(peeBreakTime());
     }
@@ -122,6 +126,7 @@ public class PeeMeter : MonoBehaviour
 
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         peeBreak = false;
+        gameObject.transform.position = startPos;
 
     }
 

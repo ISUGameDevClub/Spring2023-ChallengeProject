@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - BoxMover
+  - Box
+  - BoxChecker
+  - Conveyor
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - UI
   - 
   - Box
-  - 
-  - 
+  - BoxMover
+  - BoxChecker
   - 
   - 
   - 
@@ -47,7 +50,4 @@ TagManager:
     locked: 0
   - name: TileTop
     uniqueID: 3827685885
-    locked: 0
-  - name: WorldSpaceUI
-    uniqueID: 1750271133
     locked: 0

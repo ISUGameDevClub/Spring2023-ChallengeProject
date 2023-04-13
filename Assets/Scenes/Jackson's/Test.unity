@@ -526,8 +526,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580d9e854e66fff4994b51d9b619cebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 2
-  boxPrefab: {fileID: 5852457780800707301, guid: 9d89164904e128945967e03e24df304b, type: 3}
+  timelines: []
+  currentTimelineIndex: 0
+  spawnTimer: 0
+  noBoxesLeft: 0
+  boxPrefab0: {fileID: 0}
+  boxPrefab1: {fileID: 0}
+  boxPrefab2: {fileID: 0}
 --- !u!1839735485 &782731186
 Tilemap:
   m_ObjectHideFlags: 0
@@ -702,7 +707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 534743362409023980, guid: 2a5c8ecd4a816344ba9b20651f3edaf9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.9148765
+      value: 3.08
       objectReference: {fileID: 0}
     - target: {fileID: 534743362409023980, guid: 2a5c8ecd4a816344ba9b20651f3edaf9, type: 3}
       propertyPath: m_LocalPosition.y

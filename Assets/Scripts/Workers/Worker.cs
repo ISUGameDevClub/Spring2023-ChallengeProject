@@ -18,21 +18,15 @@ public class Worker : MonoBehaviour
     private void Update()
     {
         colliders = Physics2D.OverlapCircleAll(transform.position, sightRadius);
-        
-
 
         foreach(Collider2D col in colliders)
         {
             if (col.TryGetComponent<Box>(out Box box))
             {
-                Debug.Log("Collider of " + col.name + " overlapping with circle");
+                //Debug.Log("Collider of " + col.name + " overlapping with circle");
                 col.gameObject.GetComponent<Box>().PackBox(Time.deltaTime * packRate);
             }
-
-
-            
         }
-
     }
 
     private void OnDrawGizmos()
