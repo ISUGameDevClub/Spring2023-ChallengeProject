@@ -149,6 +149,7 @@ public class BuildModeEnabler : MonoBehaviour
             else if (Input.GetMouseButton(0) && previewObject != null && !combined)
             {
 
+                lastGameObjectclickd.SnapToMouse();
                 // Move the preview object to the mouse position
                 Vector3 previewObjectTempPos = GetWorldPosition(GetNeighborCell(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) + previewOffset;
 
@@ -445,6 +446,47 @@ public class BuildModeEnabler : MonoBehaviour
     {
         isEarseMode = Enable;
         isBuildMode = false;
+    }
+}
+
+
+public static class GameObjectExtensions
+{
+    public static void SnapToMouse(this GameObject gameObject)
+    {
+        // Get the current mouse position in screen coordinates
+        Vector3 mousePos = Input.mousePosition;
+
+        // Convert the mouse position from screen coordinates to world coordinates
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, gameObject.transform.position.z - Camera.main.transform.position.z));
+
+        // Calculate the direction to point the object at
+        Vector3 direction = mousePos - gameObject.transform.position;
+
+        // Calculate the angle between the current forward direction of the object and the target direction
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        // Round the angle to the nearest 90 degrees
+        angle = Mathf.Round(angle / 90f) * 90f;
+
+        // Snap the object's rotation to the nearest 90-degree angle
+        gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + -90));
+        gameObject.SnapTo90Degree();
+    }
+
+        public static void SnapTo90Degree(this GameObject gameObject)
+    {
+        // Get the current rotation of the game object
+        Quaternion rotation = gameObject.transform.rotation;
+
+        // Calculate the current rotation angle in degrees
+        float angle = rotation.eulerAngles.z;
+
+        // Calculate the target rotation angle in degrees
+        float targetAngle = Mathf.Round(angle / 90f) * 90f;
+
+        // Set the target rotation of the game object
+        gameObject.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, targetAngle));
     }
 }
 

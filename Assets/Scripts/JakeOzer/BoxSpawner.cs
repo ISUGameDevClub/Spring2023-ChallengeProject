@@ -13,11 +13,15 @@ public class BoxSpawner : MonoBehaviour
     }
 
     [SerializeField] private List<Timeline> timelines;
-    private int currentTimelineIndex;
+    public int currentTimelineIndex;
     public float spawnTimer;
     private BoxMover boxMover;
 
     public bool noBoxesLeft = false;
+    public GameObject boxPrefab0;
+    public GameObject boxPrefab1;
+    public GameObject boxPrefab2;
+
 
     private void Start()
     {
@@ -80,6 +84,12 @@ public class BoxSpawner : MonoBehaviour
 
     private void LoadCSV(string filePath)
     {
+            // Check if filePath is null or empty
+    if (string.IsNullOrEmpty(filePath))
+    {
+        Debug.LogError("File path is null or empty!");
+        return;
+    }
         // Read the file
         string[] lines = File.ReadAllLines(filePath);
 
@@ -103,9 +113,26 @@ public class BoxSpawner : MonoBehaviour
             }
 
             // Add the box to the current timeline
-            GameObject boxPrefab = Resources.Load<GameObject>("Prefabs/" + values[0]);
+
+
+           
             float spawnTime = float.Parse(values[1]);
-            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab);
+
+                switch( values[0])
+    {
+        case "0":
+            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab0);
+            break;
+        case "1":
+            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab1);
+            break;
+        case "2":
+            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab2);
+            break;
+        default:
+            Debug.LogError("Invalid box index");
+            return;
+    }
             timelines[currentTimelineIndex].spawnTimes.Add(spawnTime);
         }
     }
