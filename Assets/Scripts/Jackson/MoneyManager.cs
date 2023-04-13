@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
 {
     [SerializeField] public float totalMoney;
     [SerializeField] public float startingCash;
+    [SerializeField] private Text moneyText;
 
     private void Start()
     {
         totalMoney = startingCash;
+    }
+
+    private void Update()
+    {
+        moneyText.text = totalMoney.ToString();
     }
 
     public float getMoney()

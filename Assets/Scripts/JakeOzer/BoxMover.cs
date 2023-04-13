@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoxMover : MonoBehaviour
 {
-    [SerializeField] private List<Box> boxes;
+    [SerializeField] public List<Box> boxes;
     [SerializeField] public List<GameObject> conveyorList;
 
     [SerializeField] private float conveyorSpeed = 1f;
@@ -21,7 +21,7 @@ public class BoxMover : MonoBehaviour
         {
             if (box != null)
             {
-                float t = (Time.time - box.GetConveyorTime()) / conveyorSpeed;
+                float t = (Time.time - box.GetConveyorTime()) / box.GetComponent<Box>().speed;
 
                 //Only lerp box if there is another conveyor to move to, else dont move box
                 if (box.GetConveyorIndex() < (conveyorList.Count - 1))
