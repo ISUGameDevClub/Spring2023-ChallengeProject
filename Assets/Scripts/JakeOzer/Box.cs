@@ -10,7 +10,7 @@ public class Box : MonoBehaviour
     public float boxFill { get; private set; } = 0;
     public float boxFillMax { get; private set; } = 100;
     public float speed;
-
+    public AudioClip fillBeep;
     public float value;
 
     private bool isPacked = false;
@@ -19,6 +19,8 @@ public class Box : MonoBehaviour
 
     private void Start()
     {
+        AudioSource audio = GetComponent<AudioSource>();
+        //AudioClip audio = GetComponent<AudioClip>();
         conveyorTime = Time.time;
     }
 
@@ -45,6 +47,13 @@ public class Box : MonoBehaviour
         {
             //Debug.Log("Box is filled.");
             isPacked = true;
+        }
+
+        if (isPacked = true)
+        {
+            GetComponent<AudioSource>().clip = fillBeep;
+            GetComponent<AudioSource>().Play();
+
         }
 
     }
