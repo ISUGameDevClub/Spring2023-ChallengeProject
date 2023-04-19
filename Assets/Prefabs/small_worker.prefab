@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9184536597774237580}
   - component: {fileID: 5159320220752769723}
   m_Layer: 0
-  m_Name: stocky_worker
+  m_Name: small_worker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   packSpeed: 0.5
   moveDistance: 0.1
   moveSpeed: 10
+  spriteRenderer: {fileID: 0}
 --- !u!114 &5159320220752769723
 MonoBehaviour:
   m_ObjectHideFlags: 0
