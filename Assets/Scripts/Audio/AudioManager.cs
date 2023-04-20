@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     private int[] trackthreashold;
-
     private int boxQuantity = 0;
 
     // Start is called before the first frame update

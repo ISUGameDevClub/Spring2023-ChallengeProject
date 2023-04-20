@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [System.Serializable]
 public class AudioTrack
@@ -9,6 +10,7 @@ public class AudioTrack
     private AudioClip clip;
     [SerializeField]
     private float maxVolume = 1f;
+    //public audioModu
 
     private AudioSource source;
 
@@ -16,7 +18,7 @@ public class AudioTrack
     // public AudioSource Source => source;
     public float MaxVolume => maxVolume;
 
-    public void Initialize( GameObject hostObject ) {
+    public void Initialize( GameObject hostObject , AudioMixer mixer) {
         if ( source != null) {
             Debug.LogError("AudioTrack already initialized");
             return;
@@ -27,6 +29,7 @@ public class AudioTrack
         source.clip = clip;
         source.volume = 0f;
         source.loop = true;
+        source.outputAudioMixerGroup = mixer.FindMatchingGroups("Music")[0];
 
         source.Play();
     }

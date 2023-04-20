@@ -12,6 +12,7 @@ public class Box : MonoBehaviour
     public float speed;
     public AudioClip fillBeep;
     public float value;
+    private bool audioPlayed = false;
 
     private bool isPacked = false;
     [SerializeField] private FillBar fillBar;
@@ -49,11 +50,11 @@ public class Box : MonoBehaviour
             isPacked = true;
         }
 
-        if (isPacked = true)
+        if (isPacked &&! audioPlayed)
         {
             GetComponent<AudioSource>().clip = fillBeep;
             GetComponent<AudioSource>().Play();
-
+            audioPlayed = true;
         }
 
     }
