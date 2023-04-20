@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - BoxMover
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -13,14 +12,9 @@ TagManager:
   - Water
   - UI
   - 
-  - Box
-<<<<<<< HEAD
   - 
   - 
-=======
-  - BoxMover
-  - BoxChecker
->>>>>>> Paul's
+  - 
   - 
   - 
   - 
@@ -46,10 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: TileBottom
-    uniqueID: 146835219
-    locked: 0
-  - name: TileTop
-    uniqueID: 3827685885
     locked: 0
