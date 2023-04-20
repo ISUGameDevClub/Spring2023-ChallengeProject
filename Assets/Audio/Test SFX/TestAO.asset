@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966868922d0f47045a6210e53d177343, type: 3}
+  m_Name: TestAO
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: c02e976e33a9df34d8e8b30a19e77c6a, type: 3}
+  - {fileID: 8300000, guid: 246805d03cbc97d4e933a0eb6bd92d79, type: 3}
+  - {fileID: 8300000, guid: 201e56424c4196a41be864a3931e3aa8, type: 3}
+  loopAudio: 0
+  randomizeOrderPlayed: 1
+  avoidPlayingSameSoundInARow: 1
+  playOnAwake: 0
+  volume: 1
+  pitch: 1
+  varyVolume: 1
+  volumeVariation: 0.211
+  varyPitch: 1
+  pitchVariation: 0.121

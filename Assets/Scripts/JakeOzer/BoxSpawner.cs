@@ -5,92 +5,135 @@ using System.IO;
 
 public class BoxSpawner : MonoBehaviour
 {
-[System.Serializable]
-public class Timeline
-{
-public List<GameObject> boxPrefabs;
-public List<float> spawnTimes;    
-    public Timeline(string[] data)
+    [System.Serializable]
+    public class Timeline
     {
-        boxPrefabs = new List<GameObject>();
-        spawnTimes = new List<float>();
+        public List<GameObject> boxPrefabs;
+        public List<float> spawnTimes;
+    }
 
-        for (int i = 1; i < data.Length; i += 2)
+    [SerializeField] private List<Timeline> timelines;
+    public int currentTimelineIndex;
+    public float spawnTimer;
+    private BoxMover boxMover;
+
+    public bool noBoxesLeft = false;
+    public GameObject boxPrefab0;
+    public GameObject boxPrefab1;
+    public GameObject boxPrefab2;
+
+
+    private void Start()
+    {
+        boxMover = FindObjectOfType<BoxMover>();
+        currentTimelineIndex = 0;
+        LoadCSV("Timelines.csv"); // Load timelines from CSV file
+    }
+
+    private void Update()
+    {
+        Timeline currentTimeline = timelines[currentTimelineIndex];
+
+        spawnTimer += Time.deltaTime;
+
+        // Check if there's a box to spawn
+        int nextBoxIndex = GetNextBoxIndex(currentTimeline.spawnTimes);
+        if (nextBoxIndex != -1 && spawnTimer >= currentTimeline.spawnTimes[nextBoxIndex])
         {
-            GameObject boxPrefab = Resources.Load<GameObject>(data[i]);
-            boxPrefabs.Add(boxPrefab);
-            float spawnTime = float.Parse(data[i + 1]);
-            spawnTimes.Add(spawnTime);
+            // Spawn the next box
+            SpawnBox(currentTimeline.boxPrefabs[nextBoxIndex]);
+
+            // Remove the box from the timeline
+            currentTimeline.spawnTimes.RemoveAt(nextBoxIndex);
+            currentTimeline.boxPrefabs.RemoveAt(nextBoxIndex);
+        }
+
+        noBoxesLeft =  boxMover.boxes.Count != 0;
+
+        //Debug.Log("Current Time: " + spawnTimer);
+    }
+
+    private int GetNextBoxIndex(List<float> spawnTimes)
+    {
+        // Find the index of the next box to spawn
+        for (int i = 0; i < spawnTimes.Count; i++)
+        {
+            if (spawnTimer >= spawnTimes[i])
+            {
+                return i;
+            }
+        }
+
+        // No box to spawn
+        return -1;
+    }
+
+    private void SpawnBox(GameObject boxPrefab)
+    {
+        Box newBox = Instantiate(boxPrefab, transform.position, Quaternion.identity).GetComponent<Box>();
+        boxMover.AddBoxToGameList(newBox);
+    }
+
+    public void SetTimeline(int timelineIndex)
+    {
+        if (timelineIndex < timelines.Count)
+        {
+            currentTimelineIndex = timelineIndex;
         }
     }
-}
 
-[SerializeField] private List<Timeline> timelines;
-private int currentTimelineIndex;
-public float spawnTimer;
-private BoxMover boxMover;
-
-public bool noBoxesLeft = false;
-
-public string csvFilePath;
-
-private void Start()
-{
-    boxMover = FindObjectOfType<BoxMover>();
-    currentTimelineIndex = 0;
-
-    timelines = ParseCSVFile(csvFilePath);
-}
-
-private void Update()
-{
-    Timeline currentTimeline = timelines[currentTimelineIndex];
-
-    spawnTimer += Time.deltaTime;
-
-    // Check if there's a box to spawn
-    int nextBoxIndex = GetNextBoxIndex(currentTimeline.spawnTimes);
-    if (nextBoxIndex != -1 && spawnTimer >= currentTimeline.spawnTimes[nextBoxIndex])
+    private void LoadCSV(string filePath)
     {
-        // Spawn the next box
-        SpawnBox(currentTimeline.boxPrefabs[nextBoxIndex].name);
-
-        // Remove the box from the timeline
-        currentTimeline.spawnTimes.RemoveAt(nextBoxIndex);
-        currentTimeline.boxPrefabs.RemoveAt(nextBoxIndex);
+            // Check if filePath is null or empty
+    if (string.IsNullOrEmpty(filePath))
+    {
+        Debug.LogError("File path is null or empty!");
+        return;
     }
+        // Read the file
+        string[] lines = File.ReadAllLines(filePath);
 
-    noBoxesLeft =  boxMover.boxes.Count != 0;
-
-    //Debug.Log("Current Time: " + spawnTimer);
-}
-
-private int GetNextBoxIndex(List<float> spawnTimes)
-{
-    // Find the index of the next box to spawn
-    for (int i = 0; i < spawnTimes.Count; i++)
-    {
-        if (spawnTimer >= spawnTimes[i])
+        // Parse each line
+        foreach (string line in lines)
         {
-            return i;
-        }
-    }
+            string[] values = line.Split(',');
 
-    // No box to spawn
-    return -1;
-}
+            // Check if the box slot is empty
+            if (string.IsNullOrEmpty(values[0]))
+            {
+                // Increment the timeline index
+                currentTimelineIndex++;
+                continue;
+            }
 
-private void SpawnBox(string boxPrefabName)
-{
-    GameObject boxPrefab = Resources.Load<GameObject>(boxPrefabName);
-    Box newBox = Instantiate(boxPrefab, transform.position, Quaternion.identity).GetComponent<Box>();
-    boxMover.AddBoxToGameList(newBox);
-}
+            // Create a new timeline if necessary
+            if (timelines.Count <= currentTimelineIndex)
+            {
+                timelines.Add(new Timeline());
+            }
 
-public void SetTimeline(int timelineIndex)
-{
-    if (timelineIndex < timelines.Count)
+            // Add the box to the current timeline
+
+
+           
+            float spawnTime = float.Parse(values[1]);
+
+                switch( values[0])
     {
-        currentTimelineIndex = timelineIndex;
+        case "0":
+            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab0);
+            break;
+        case "1":
+            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab1);
+            break;
+        case "2":
+            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab2);
+            break;
+        default:
+            Debug.LogError("Invalid box index");
+            return;
+    }
+            timelines[currentTimelineIndex].spawnTimes.Add(spawnTime);
+        }
     }
 }

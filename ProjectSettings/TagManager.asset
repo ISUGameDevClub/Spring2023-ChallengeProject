@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BoxMover
+  - Box
+  - BoxChecker
+  - Conveyor
   layers:
   - Default
   - TransparentFX
@@ -12,9 +16,9 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
-  - 
+  - Box
+  - BoxMover
+  - BoxChecker
   - 
   - 
   - 
@@ -38,6 +42,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 2605497413
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TileBottom
+    uniqueID: 146835219
+    locked: 0
+  - name: TileTop
+    uniqueID: 3827685885
+    locked: 0
+  - name: Worker
+    uniqueID: 484122269
     locked: 0
