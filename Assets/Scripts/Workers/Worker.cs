@@ -11,32 +11,65 @@ public class Worker : MonoBehaviour
     public float moveDistance = 0.1f;
     public float moveSpeed = 10f;
     private bool isMoving = false;
+    public bool isMouseOver = false;
+
 
     [SerializeField]
-    public float cost { get; private set;}  
+    public float cost;
     public SpriteRenderer spriteRenderer; 
+
+    public SpriteRenderer keepTrackSpriteRenderer; 
 
     Collider2D[] colliders;
     private LayerMask boxLayerMask;
+    [SerializeField]
+    public KeepTrack keepTrack;
+
 
     private void Start()
     {
         boxLayerMask = LayerMask.GetMask("Box");
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        keepTrackSpriteRenderer = keepTrack.GetComponent<SpriteRenderer>();
+    }
+
+        private void Update()
+    {
+        // Adjust the transparency level of the sprite renderer based on whether the mouse is over the object
+        if (isMouseOver)
+        {
+            // Make the object slightly visible (alpha value of 0.5)
+            keepTrackSpriteRenderer.color = new Color(keepTrackSpriteRenderer.color.r, keepTrackSpriteRenderer.color.g, keepTrackSpriteRenderer.color.b, 0.3f);
+        }
+        else
+        {
+            // Make the object fully transparent (alpha value of 0)
+            keepTrackSpriteRenderer.color = new Color(keepTrackSpriteRenderer.color.r, keepTrackSpriteRenderer.color.g, keepTrackSpriteRenderer.color.b, 0.0f);
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        isMouseOver = true;
+    }
+
+    private void OnMouseExit()
+    {
+        isMouseOver = false;
     }
 
     private void CheckForBoxes()
     {
-        colliders = Physics2D.OverlapCircleAll(transform.position, sightRadius);
-
-        foreach(Collider2D col in colliders)
-        {
-            if (col.TryGetComponent<Box>(out Box box))
+            if (keepTrack.boxObjects.Count > 0)
             {
-                col.gameObject.GetComponent<Box>().PackBox(packRate);
+                Box box = keepTrack.boxObjects[0].GetComponent<Box>();
+                box.PackBox(packRate);
+                if (box.boxFill >= box.boxFillMax)
+                {
+                    keepTrack.boxObjects.Remove(keepTrack.boxObjects[0]);
+                }
                 MoveWorker();
+                GetComponent<PeeMeter>().enabled = true;
             }
-        }
     }
 
     private void MoveWorker()
@@ -50,7 +83,9 @@ public class Worker : MonoBehaviour
     public void StartPacking()
     {
         InvokeRepeating("CheckForBoxes", 0f, packSpeed); 
-        //spriteRenderer.color = new Color(1f, 1f, 1f, 255f);
+        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+        GetComponent<BoxCollider2D>().enabled = true;
+        keepTrack.gameObject.GetComponent<CircleCollider2D>().enabled = true;
     }
 
  private IEnumerator MoveCoroutine()
@@ -60,7 +95,7 @@ public class Worker : MonoBehaviour
     float moveTimer = 0f;
     Vector3 startPos = transform.position;
 
-    while (moveTimer < packSpeed / 4)
+    while (moveTimer < moveSpeed / 4)
     {
         float newY = startPos.y + Mathf.Sin(moveTimer * moveSpeed) * moveDistance;
         transform.position = new Vector3(startPos.x, newY, startPos.z);

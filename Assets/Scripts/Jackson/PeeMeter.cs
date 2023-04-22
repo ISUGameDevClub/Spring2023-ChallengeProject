@@ -44,7 +44,7 @@ public class PeeMeter : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         peeMeter = gameObject.transform.GetChild(0).gameObject;
         spriteRenderer = peeMeter.GetComponent<SpriteRenderer>();

@@ -14,9 +14,12 @@ public class WorkerPlacer : MonoBehaviour
 
     private MoneyManager moneyManager;
 
+    private GameManager gameManager;
+
     private void Start()
     {
         moneyManager = FindObjectOfType<MoneyManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     public void StartPlacing(int value)
@@ -35,6 +38,15 @@ public class WorkerPlacer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && isPlacing && hit.collider == null)
         {
+            if(gameManager.workerAmount.ContainsKey(tempWorker))
+            {
+                gameManager.workerAmount[tempWorker] += 1;
+            }
+            else
+            {
+                gameManager.workerAmount.Add(tempWorker, 1);
+            }
+
             tempWorker.GetComponent<Worker>().StartPacking();
             moneyManager.subtractMoney(tempWorker.GetComponent<Worker>().cost);
             isPlacing = false;
