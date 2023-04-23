@@ -52,6 +52,10 @@ public class GameManager : MonoBehaviour
         {
             moneyText.text = (wages + (factoryCost * currentRound)).ToString();
         }
+        if(isPlaying && boxSpawner.noBoxesLeft)
+        {
+            EndRound();
+        }
     }
     void FixedUpdate()
     {   
@@ -72,10 +76,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void StartRound()
+    public void StartRound()
     {
-        if(IsListOfListsEmpty(BME.minorGameObjectsList) && boxSpawner.noBoxesLeft)
+        Debug.Log("test start");
+        if(IsListOfListsEmpty(BME.minorGameObjectsList) && (currentRound == 0 || boxSpawner.noBoxesLeft))
         {
+            moneyManager.subtractMoney(wages + (factoryCost * currentRound));
+            moneyText.enabled = false;
+            negativeMoneySignText.enabled = false;
+
             BME.isBuildMode = false;
             BME.isEarseMode = false;
 
@@ -83,16 +92,15 @@ public class GameManager : MonoBehaviour
             boxSpawner.SetTimeline(currentRound);
             boxSpawner.spawnTimer = 0;
 
-            moneyText.enabled = false;
-            negativeMoneySignText.enabled = false;
-            moneyManager.subtractMoney(wages + (factoryCost * currentRound));
 
         } else 
         {
+            isPlaying = false;
             Debug.Log("failed" + BME.minorGameObjectsList.Count); 
         }
 
     }
+
 
     bool IsListOfListsEmpty<T>(List<List<T>> list)
 {
@@ -118,5 +126,11 @@ public class GameManager : MonoBehaviour
         isPlaying = false;
         moneyText.enabled = true;
         negativeMoneySignText.enabled = true;
+        if(moneyManager.getMoney() < 0)
+        {
+            //Game Over
+            Debug.Log("Game Over");
+        }
+     
     }
 }
