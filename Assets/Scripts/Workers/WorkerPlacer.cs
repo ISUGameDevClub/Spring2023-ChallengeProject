@@ -16,14 +16,15 @@ public class WorkerPlacer : MonoBehaviour
     {
         isPlacing = true;
         tempWorker = Instantiate(ghostWorker, mousePos, Quaternion.identity);
-        
     }
 
     private void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 
-        if (Input.GetMouseButtonDown(0) && isPlacing)
+        if (Input.GetMouseButtonDown(0) && isPlacing && hit.collider == null)
         {
             Destroy(tempWorker);
             Instantiate(worker, mousePos, Quaternion.identity);
