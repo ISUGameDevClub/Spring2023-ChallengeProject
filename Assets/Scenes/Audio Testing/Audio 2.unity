@@ -1185,17 +1185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77e28472d49223469a964c9ce9678d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1991581818 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2427123456452100499, guid: 0461be70af12e2c44b0ae5a8c59b79b2, type: 3}
-  m_PrefabInstance: {fileID: 288459560516453327}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a6e60c505cfdf47af6d6df919f84ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2118822874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,9 +1269,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1991581818}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartRoundButton
+      - m_Target: {fileID: 782731187}
+        m_TargetAssemblyTypeName: BoxHopper, Assembly-CSharp
+        m_MethodName: StartRound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
