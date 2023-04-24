@@ -12,6 +12,8 @@ public class BuildModeEnabler : MonoBehaviour
     public GameObject boxMover;
 
     public int gridSize = 1; // The size of each cell in the grid
+    [SerializeField]
+    public Vector2 buildOffset; // The offset of the grid from the bottom left corner of the tilemap
     public bool isBuildMode ; // A flag to indicate whether the game is in build mode
     public bool isEarseMode ; // A flag to indicate whether the game is in build mode
 
@@ -149,6 +151,7 @@ public class BuildModeEnabler : MonoBehaviour
             else if (Input.GetMouseButton(0) && previewObject != null && !combined)
             {
 
+                lastGameObjectclickd.SnapToMouse();
                 // Move the preview object to the mouse position
                 Vector3 previewObjectTempPos = GetWorldPosition(GetNeighborCell(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) + previewOffset;
 
@@ -297,7 +300,7 @@ public class BuildModeEnabler : MonoBehaviour
 
     public void SaveCon()
     {
-        moneyManager.addMoney(-priceOfCon);
+        //moneyManager.addMoney(-priceOfCon);
         previewObject.GetComponent<SpriteRenderer>().color = new Color(99f, 99f, 99f, 225f);
         ReturnList(lastGameObjectclickd).Add(previewObject);
         LastGameObjectChecker lGOC = previewObject.GetComponent<LastGameObjectChecker>();
@@ -311,6 +314,7 @@ public class BuildModeEnabler : MonoBehaviour
     {
         // Create a preview object at the hit point
         previewObject = Instantiate(buildModeObject, hit.point, Quaternion.identity);
+        moneyManager.addMoney(-priceOfCon);
         previewOffset = new Vector2(previewObject.transform.position.x, previewObject.transform.position.y) - hit.point;
         previewObject.transform.position = GetWorldPosition(GetNeighborCell(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) + previewOffset;
         previewObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
@@ -397,7 +401,7 @@ public class BuildModeEnabler : MonoBehaviour
         Vector2 cameraPosition = mainCamera.transform.position;
         Vector2 cameraSize = new Vector2(mainCamera.orthographicSize * mainCamera.aspect, mainCamera.orthographicSize);
 
-        Rect cameraViewRect = new Rect(cameraPosition - cameraSize, cameraSize * 2f);
+        Rect cameraViewRect = new Rect(cameraPosition - cameraSize + buildOffset, (cameraSize - buildOffset) * 2f );
 
         return cameraViewRect.Contains(point);
     }
@@ -445,6 +449,47 @@ public class BuildModeEnabler : MonoBehaviour
     {
         isEarseMode = Enable;
         isBuildMode = false;
+    }
+}
+
+
+public static class GameObjectExtensions
+{
+    public static void SnapToMouse(this GameObject gameObject)
+    {
+        // Get the current mouse position in screen coordinates
+        Vector3 mousePos = Input.mousePosition;
+
+        // Convert the mouse position from screen coordinates to world coordinates
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, gameObject.transform.position.z - Camera.main.transform.position.z));
+
+        // Calculate the direction to point the object at
+        Vector3 direction = mousePos - gameObject.transform.position;
+
+        // Calculate the angle between the current forward direction of the object and the target direction
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        // Round the angle to the nearest 90 degrees
+        angle = Mathf.Round(angle / 90f) * 90f;
+
+        // Snap the object's rotation to the nearest 90-degree angle
+        gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + -90));
+        gameObject.SnapTo90Degree();
+    }
+
+        public static void SnapTo90Degree(this GameObject gameObject)
+    {
+        // Get the current rotation of the game object
+        Quaternion rotation = gameObject.transform.rotation;
+
+        // Calculate the current rotation angle in degrees
+        float angle = rotation.eulerAngles.z;
+
+        // Calculate the target rotation angle in degrees
+        float targetAngle = Mathf.Round(angle / 90f) * 90f;
+
+        // Set the target rotation of the game object
+        gameObject.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, targetAngle));
     }
 }
 
