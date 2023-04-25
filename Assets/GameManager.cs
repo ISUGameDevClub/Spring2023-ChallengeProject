@@ -2,10 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 
 public class GameManager : MonoBehaviour
 {
+    //events 
+    public event Action roundStart;
+    public event Action roundEnd;
+    public event Action roundWin;
+    public event Action roundLose;
+
+
+    //not events
     public BuildModeEnabler BME;
     public BoxSpawner boxSpawner;
     public MoneyManager moneyManager;
@@ -92,7 +101,7 @@ public class GameManager : MonoBehaviour
             boxSpawner.SetTimeline(currentRound);
             boxSpawner.spawnTimer = 0;
 
-
+            roundStart?.Invoke();
         } else 
         {
             isPlaying = false;
@@ -126,10 +135,17 @@ public class GameManager : MonoBehaviour
         isPlaying = false;
         moneyText.enabled = true;
         negativeMoneySignText.enabled = true;
+        
+        roundEnd?.Invoke();
         if(moneyManager.getMoney() < 0)
         {
             //Game Over
             Debug.Log("Game Over");
+            roundLose?.Invoke();
+        }else{
+            //Win
+            Debug.Log("next Round");
+            roundWin?.Invoke();
         }
      
     }
