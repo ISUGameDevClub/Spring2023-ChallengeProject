@@ -1,44 +1,98 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
+
 
 public class GameManager : MonoBehaviour
 {
+    //events 
+    public event Action roundStart;
+    public event Action roundEnd;
+    public event Action roundWin;
+    public event Action roundLose;
+
+
+    //not events
     public BuildModeEnabler BME;
     public BoxSpawner boxSpawner;
+    public MoneyManager moneyManager;
 
     public int currentRound = 0;
 
+    public float factoryCost = 0;
+
+    public float wageRatio = 1.0f;
+
     public bool isPlaying = false;
+    public Dictionary<GameObject,int> workerAmount = new Dictionary<GameObject,int>();
+
+    [SerializeField] private Text roundText;
+
+    [SerializeField] private Text moneyText;
+    [SerializeField] private Text negativeMoneySignText;
+    private float wages;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        boxSpawner = FindObjectOfType<BoxSpawner>();
+        moneyManager = FindObjectOfType<MoneyManager>();
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(roundText.enabled)
+        {
+            roundText.text = currentRound.ToString();
+        }
+
+
         if(isPlaying && boxSpawner.noBoxesLeft)
         {
             EndRound();
         }
+
+        if(moneyText.enabled)
+        {
+            moneyText.text = (wages + (factoryCost * currentRound)).ToString();
+        }
+        if(isPlaying && boxSpawner.noBoxesLeft)
+        {
+            EndRound();
+        }
+    }
+    void FixedUpdate()
+    {   
+        wages = 0;
+        foreach (KeyValuePair<GameObject, int> entry in workerAmount)
+        {
+            wages += entry.Key.GetComponent<Worker>().cost * wageRatio * entry.Value;
+        }  
     }
 
     public void StartRoundButton()
     {
         if(!isPlaying)
         {
+            isPlaying = true;
+
             StartRound();
         }
     }
 
-    void StartRound()
+    public void StartRound()
     {
-        if(IsListOfListsEmpty(BME.minorGameObjectsList))
+        Debug.Log("test start");
+        if(IsListOfListsEmpty(BME.minorGameObjectsList) && (currentRound == 0 || boxSpawner.noBoxesLeft))
         {
-            isPlaying = true;
+            moneyManager.subtractMoney(wages + (factoryCost * currentRound));
+            moneyText.enabled = false;
+            negativeMoneySignText.enabled = false;
 
             BME.isBuildMode = false;
             BME.isEarseMode = false;
@@ -46,12 +100,16 @@ public class GameManager : MonoBehaviour
             currentRound++;
             boxSpawner.SetTimeline(currentRound);
             boxSpawner.spawnTimer = 0;
+
+            roundStart?.Invoke();
         } else 
         {
+            isPlaying = false;
             Debug.Log("failed" + BME.minorGameObjectsList.Count); 
         }
 
     }
+
 
     bool IsListOfListsEmpty<T>(List<List<T>> list)
 {
@@ -75,6 +133,20 @@ public class GameManager : MonoBehaviour
     void EndRound()
     {
         isPlaying = false;
-
+        moneyText.enabled = true;
+        negativeMoneySignText.enabled = true;
+        
+        roundEnd?.Invoke();
+        if(moneyManager.getMoney() < 0)
+        {
+            //Game Over
+            Debug.Log("Game Over");
+            roundLose?.Invoke();
+        }else{
+            //Win
+            Debug.Log("next Round");
+            roundWin?.Invoke();
+        }
+     
     }
 }
