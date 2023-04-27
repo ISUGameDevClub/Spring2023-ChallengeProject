@@ -30,6 +30,8 @@ public class Worker : MonoBehaviour
     [SerializeField]
     public KeepTrack keepTrack;
 
+    public GameObject selfPrefab;
+
 
     private void Start()
     {
@@ -113,6 +115,7 @@ public class Worker : MonoBehaviour
     }
 
     isMoving = false;
+    transform.position = startPos;
 }
 
     private void OnDrawGizmos()
