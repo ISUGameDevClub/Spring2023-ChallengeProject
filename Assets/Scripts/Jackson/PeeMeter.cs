@@ -13,8 +13,6 @@ public class PeeMeter : MonoBehaviour
     private GameObject peeMeter;
     private SpriteRenderer spriteRenderer;
 
- 
-
     private GameObject gameManager;
 
     [SerializeField]
@@ -148,7 +146,7 @@ public class PeeMeter : MonoBehaviour
         {
             case 0:
                 spriteRenderer.sprite = pee0;
-                startingPos = new Vector3(transform.position.x, transform.position.y+0.5f,5);
+                startingPos = new Vector3(transform.position.x, transform.position.y+0.75f,5);
                 peeMeter.transform.position = startingPos;
                 break;
 

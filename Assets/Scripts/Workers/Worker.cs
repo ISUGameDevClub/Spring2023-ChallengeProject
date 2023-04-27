@@ -120,8 +120,9 @@ public class Worker : MonoBehaviour
     }
 
     isMoving = false;
-        //Jackson added this
-        transform.position = startPos;
+        
+    //After working animation, the worker is moved back to it's starting spot
+    transform.position = startPos;
 }
 
     private void OnDrawGizmos()
