@@ -51,7 +51,7 @@ public class BoxSpawner : MonoBehaviour
             currentTimeline.boxPrefabs.RemoveAt(nextBoxIndex);
         }
 
-        noBoxesLeft =  boxMover.boxes.Count != 0;
+        noBoxesLeft =  boxMover.boxes.Count <= 0 && timelines[currentTimelineIndex].spawnTimes.Count <= 0;
 
         //Debug.Log("Current Time: " + spawnTimer);
     }
@@ -89,6 +89,7 @@ public class BoxSpawner : MonoBehaviour
 
     private void LoadCSV(string filePath)
     {
+         int recordingCurrentTimelineIndex = 0;
             // Check if filePath is null or empty
     if (string.IsNullOrEmpty(filePath))
     {
@@ -106,13 +107,14 @@ public class BoxSpawner : MonoBehaviour
             // Check if the box slot is empty
             if (string.IsNullOrEmpty(values[0]))
             {
+                Debug.Log("Empty box slot");
                 // Increment the timeline index
-                currentTimelineIndex++;
+                recordingCurrentTimelineIndex++;
                 continue;
             }
 
             // Create a new timeline if necessary
-            if (timelines.Count <= currentTimelineIndex)
+            if (timelines.Count <= recordingCurrentTimelineIndex)
             {
                 timelines.Add(new Timeline());
             }
@@ -126,19 +128,19 @@ public class BoxSpawner : MonoBehaviour
                 switch( values[0])
     {
         case "0":
-            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab0);
+            timelines[recordingCurrentTimelineIndex].boxPrefabs.Add(boxPrefab0);
             break;
         case "1":
-            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab1);
+            timelines[recordingCurrentTimelineIndex].boxPrefabs.Add(boxPrefab1);
             break;
         case "2":
-            timelines[currentTimelineIndex].boxPrefabs.Add(boxPrefab2);
+            timelines[recordingCurrentTimelineIndex].boxPrefabs.Add(boxPrefab2);
             break;
         default:
             Debug.LogError("Invalid box index");
             return;
     }
-            timelines[currentTimelineIndex].spawnTimes.Add(spawnTime);
+            timelines[recordingCurrentTimelineIndex].spawnTimes.Add(spawnTime);
         }
     }
 }

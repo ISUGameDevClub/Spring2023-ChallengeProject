@@ -10,9 +10,8 @@ public class Box : MonoBehaviour
     public float boxFill { get; private set; } = 0;
     public float boxFillMax { get; private set; } = 100;
     public float speed;
-    public AudioClip fillBeep;
+
     public float value;
-    private bool audioPlayed = false;
 
     private bool isPacked = false;
     [SerializeField] private FillBar fillBar;
@@ -20,8 +19,6 @@ public class Box : MonoBehaviour
 
     private void Start()
     {
-        AudioSource audio = GetComponent<AudioSource>();
-        //AudioClip audio = GetComponent<AudioClip>();
         conveyorTime = Time.time;
     }
 
@@ -37,7 +34,7 @@ public class Box : MonoBehaviour
         conveyorTime = Time.time;
     }
 
-    public void PackBox(float amount)
+    public bool PackBox(float amount)
     {
         fillBar.transform.GetChild(0).gameObject.SetActive(true);
         fillBar.transform.GetChild(1).gameObject.SetActive(true);
@@ -49,14 +46,7 @@ public class Box : MonoBehaviour
             //Debug.Log("Box is filled.");
             isPacked = true;
         }
-
-        if (isPacked &&! audioPlayed)
-        {
-            GetComponent<AudioSource>().clip = fillBeep;
-            GetComponent<AudioSource>().Play();
-            audioPlayed = true;
-        }
-
+        return isPacked;
     }
 
 }
