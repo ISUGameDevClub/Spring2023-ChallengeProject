@@ -59,9 +59,23 @@ public class BuildModeEnabler : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                //d
+
                 // Check if the ray hits a cell in the grid
                 if (hit.collider != null)
                 {
+                    List<GameObject> tempList = ReturnList(hit.collider.gameObject);
+
+                    int empty2 = -1;
+                    for (int j = 0; empty2 == -1; j++)
+                    {
+                        Debug.Log(minorGameObjectsList[j].Count);
+                        if (minorGameObjectsList[j].Count == 0)
+                        {
+                            empty2 = j;
+                        }
+                    }
+
                     int targetIndex = gameObjectsList.IndexOf(hit.collider.gameObject);
                     if (targetIndex >= 0)
                     {
@@ -69,7 +83,15 @@ public class BuildModeEnabler : MonoBehaviour
                         for (int i = 0; i < count; i++)
                         {
                             GameObject obj = gameObjectsList[targetIndex];
+                           
                             CanBeDestroyedCheck(obj);
+                            if(obj == endPointGameObject && hit.transform.gameObject != endPointGameObject)
+                            {
+                                minorGameObjectsList[empty2].Add(tempList[i]);
+                            LastGameObjectChecker tempLGOC = tempList[i].GetComponent<LastGameObjectChecker>();
+                            tempLGOC.minorList = minorGameObjectsList[empty2];
+                            tempLGOC.minorListNumber = empty2;
+                            }
                         }
                     }
                 }
@@ -78,6 +100,10 @@ public class BuildModeEnabler : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
+
+                    
+                       
+
                     List<GameObject> tempList = ReturnList(hit.collider.gameObject);
 
                     int targetIndex = tempList.IndexOf(hit.collider.gameObject);
