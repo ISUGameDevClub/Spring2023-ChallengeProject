@@ -443,6 +443,7 @@ MonoBehaviour:
   tilemap: {fileID: 0}
   grid: {fileID: 253946934}
   boxMover: {fileID: 924375515}
+  gameManager: {fileID: 0}
   gridSize: 1
   buildOffset: {x: 1, y: 1}
   isBuildMode: 1
@@ -785,7 +786,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -665.4087, y: 33}
-  m_SizeDelta: {x: 56.4534, y: 113.7418}
+  m_SizeDelta: {x: 56.45337, y: 113.74179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &525651135
 MonoBehaviour:
@@ -1357,7 +1358,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -717, y: 33}
-  m_SizeDelta: {x: 46.728, y: 113.7448}
+  m_SizeDelta: {x: 46.727997, y: 113.74481}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &837177467
 MonoBehaviour:
@@ -1802,7 +1803,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -455, y: 43.182373}
-  m_SizeDelta: {x: 344.717, y: 69.4543}
+  m_SizeDelta: {x: 344.71704, y: 69.454285}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1399586483
 MonoBehaviour:

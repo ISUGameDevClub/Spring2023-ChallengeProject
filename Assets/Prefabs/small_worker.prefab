@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 534743362409023983}
   - component: {fileID: 534743362409023982}
   - component: {fileID: 9184536597774237580}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: small_worker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,11 @@ MonoBehaviour:
   packSpeed: 0.5
   moveDistance: 0.1
   moveSpeed: 10
+  isMouseOver: 0
+  cost: 0
   spriteRenderer: {fileID: 0}
+  keepTrackSpriteRenderer: {fileID: 0}
+  keepTrack: {fileID: 0}
 --- !u!1 &6397798565069426327
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,6 +42,7 @@ public class WorkerPlacer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && isPlacing && hit.collider == null)
         {
+            Debug.Log("Placed");
             if(gameManager.workerAmount.ContainsKey(tempWorker))
             {
                 gameManager.workerAmount[tempWorker] += 1;

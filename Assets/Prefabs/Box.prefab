@@ -253,7 +253,7 @@ SpriteRenderer:
   m_SortingLayerID: -467281411
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 587615e082a0d144c980d7f2820dc38a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 968892a8ec3227340861ade8ccd39d13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   speed: 1
   value: 10
   fillBar: {fileID: 7341867664963384316}
+  packedSprite: {fileID: 21300000, guid: 587615e082a0d144c980d7f2820dc38a, type: 3}
 --- !u!61 &6186903887586559884
 BoxCollider2D:
   m_ObjectHideFlags: 0

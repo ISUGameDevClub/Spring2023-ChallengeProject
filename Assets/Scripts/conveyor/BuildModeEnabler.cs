@@ -11,6 +11,8 @@ public class BuildModeEnabler : MonoBehaviour
     public Grid grid;
     public GameObject boxMover;
 
+    public GameManager gameManager;
+
     public int gridSize = 1; // The size of each cell in the grid
     [SerializeField]
     public Vector2 buildOffset; // The offset of the grid from the bottom left corner of the tilemap
@@ -36,7 +38,7 @@ public class BuildModeEnabler : MonoBehaviour
 
     private void Start()
     {
-
+        gameManager = FindObjectOfType<GameManager>();
 
         for (int i = 0; i < 20; i++)
         {
@@ -54,56 +56,66 @@ public class BuildModeEnabler : MonoBehaviour
     {
         if (isEarseMode)
         {
+            int empty = -1;
+            for (int i = 0; empty == -1; i++)
+            {
+                Debug.Log(minorGameObjectsList[i].Count);
+                if (minorGameObjectsList[i].Count == 0)
+                {
+                    empty = i;
+                }
+            }
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 
             if (Input.GetMouseButtonDown(0))
             {
-                //d
+                if(hit.collider.gameObject.layer == 11) 
+                {
+                    Debug.Log("hit");
+                    gameManager.workerAmount[hit.collider.GetComponent<Worker>().selfPrefab] -= 1;
+                    Destroy(hit.collider.GetComponent<Worker>().gameObject);
+                }
+                
+                List<GameObject> tempList = ReturnList(hit.collider.gameObject);
+
 
                 // Check if the ray hits a cell in the grid
                 if (hit.collider != null)
                 {
-                    List<GameObject> tempList = ReturnList(hit.collider.gameObject);
-
-                    int empty2 = -1;
-                    for (int j = 0; empty2 == -1; j++)
-                    {
-                        Debug.Log(minorGameObjectsList[j].Count);
-                        if (minorGameObjectsList[j].Count == 0)
-                        {
-                            empty2 = j;
-                        }
-                    }
-
                     int targetIndex = gameObjectsList.IndexOf(hit.collider.gameObject);
                     if (targetIndex >= 0)
                     {
-                        int count = gameObjectsList.Count - targetIndex;
-                        for (int i = 0; i < count; i++)
+                        //find objects list 
+
+                        int count = tempList.Count - targetIndex;
+                        for (int i = 0; i < count; i--)
                         {
-                            GameObject obj = gameObjectsList[targetIndex];
-                           
-                            CanBeDestroyedCheck(obj);
-                            if(obj == endPointGameObject && hit.transform.gameObject != endPointGameObject)
+                            GameObject obj = tempList[targetIndex];
+                            if(obj.GetComponent<LastGameObjectChecker>().endPoint == true)
                             {
-                                minorGameObjectsList[empty2].Add(tempList[i]);
-                            LastGameObjectChecker tempLGOC = tempList[i].GetComponent<LastGameObjectChecker>();
-                            tempLGOC.minorList = minorGameObjectsList[empty2];
-                            tempLGOC.minorListNumber = empty2;
+                                 tempList.Remove(obj);
+                                 minorGameObjectsList[empty].Add(obj);
+                            LastGameObjectChecker tempLGOC = obj.GetComponent<LastGameObjectChecker>();
+                            tempLGOC.minorList = minorGameObjectsList[empty];
+                            tempLGOC.minorListNumber = empty;
+                            }
+                            else
+                            {
+                                CanBeDestroyedCheck(obj);
                             }
                         }
                     }
                 }
+
+
+
             }
             else if (Input.GetMouseButton(0))
             {
                 if (hit.collider != null)
                 {
-
-                    
-                       
-
                     List<GameObject> tempList = ReturnList(hit.collider.gameObject);
 
                     int targetIndex = tempList.IndexOf(hit.collider.gameObject);
@@ -123,18 +135,7 @@ public class BuildModeEnabler : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
-                    int empty = -1;
-                    for (int i = 0; empty == -1; i++)
-                    {
-                        Debug.Log(minorGameObjectsList[i].Count);
-                        if (minorGameObjectsList[i].Count == 0)
-                        {
-                            empty = i;
-                        }
-                    }
-
                     List<GameObject> tempList = ReturnList(hit.collider.gameObject);
-
 
                     int targetIndex = tempList.IndexOf(hit.collider.gameObject);
                     if (targetIndex >= 0)

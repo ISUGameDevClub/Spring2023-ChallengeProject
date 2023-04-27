@@ -26,13 +26,14 @@ public class GameManager : MonoBehaviour
     public float wageRatio = 1.0f;
 
     public bool isPlaying = false;
+    [SerializeField]
     public Dictionary<GameObject,int> workerAmount = new Dictionary<GameObject,int>();
 
     [SerializeField] private Text roundText;
 
     [SerializeField] private Text moneyText;
     [SerializeField] private Text negativeMoneySignText;
-    private float wages;
+    public float wages;
 
 
     // Start is called before the first frame update
@@ -52,10 +53,6 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if(isPlaying && boxSpawner.noBoxesLeft)
-        {
-            EndRound();
-        }
 
         if(moneyText.enabled)
         {
@@ -71,6 +68,7 @@ public class GameManager : MonoBehaviour
         wages = 0;
         foreach (KeyValuePair<GameObject, int> entry in workerAmount)
         {
+            Debug.Log(entry);
             wages += entry.Key.GetComponent<Worker>().cost * wageRatio * entry.Value;
         }  
     }
