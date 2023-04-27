@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Worker : MonoBehaviour
 {
+    //events
+    public event Action<Box> boxPacked;
+
+
     public float sightRadius = 4f;
     public float packRate = 1f;
 
@@ -65,6 +70,9 @@ public class Worker : MonoBehaviour
                 box.PackBox(packRate);
                 if (box.boxFill >= box.boxFillMax)
                 {
+                    //call event
+                    boxPacked?.Invoke(box);
+                    
                     keepTrack.boxObjects.Remove(keepTrack.boxObjects[0]);
                 }
                 MoveWorker();

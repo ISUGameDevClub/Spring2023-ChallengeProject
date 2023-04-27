@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class WorkerPlacer : MonoBehaviour
 {
+    //events
+    public event Action<Worker> workerPlaced;
+
     [SerializeField] private List<GameObject> worker = new List<GameObject>();
 
     private GameObject tempWorker;
@@ -46,6 +50,8 @@ public class WorkerPlacer : MonoBehaviour
             {
                 gameManager.workerAmount.Add(tempWorker, 1);
             }
+            
+            workerPlaced?.Invoke(tempWorker.GetComponent<Worker>());
 
             tempWorker.GetComponent<Worker>().StartPacking();
             moneyManager.subtractMoney(tempWorker.GetComponent<Worker>().cost);
