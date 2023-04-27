@@ -15,6 +15,7 @@ public class Box : MonoBehaviour
 
     private bool isPacked = false;
     [SerializeField] private FillBar fillBar;
+    [SerializeField] private Sprite packedSprite;
 
 
     private void Start()
@@ -44,6 +45,9 @@ public class Box : MonoBehaviour
         if (boxFill >= boxFillMax)
         {
             //Debug.Log("Box is filled.");
+            GetComponent<SpriteRenderer>().sprite = packedSprite;
+            fillBar.transform.GetChild(0).gameObject.SetActive(false);
+            fillBar.transform.GetChild(1).gameObject.SetActive(false);
             isPacked = true;
         }
         return isPacked;
