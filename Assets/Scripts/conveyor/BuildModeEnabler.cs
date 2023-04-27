@@ -12,6 +12,8 @@ public class BuildModeEnabler : MonoBehaviour
     public GameObject boxMover;
 
     public int gridSize = 1; // The size of each cell in the grid
+    [SerializeField]
+    public Vector2 buildOffset; // The offset of the grid from the bottom left corner of the tilemap
     public bool isBuildMode ; // A flag to indicate whether the game is in build mode
     public bool isEarseMode ; // A flag to indicate whether the game is in build mode
 
@@ -298,7 +300,7 @@ public class BuildModeEnabler : MonoBehaviour
 
     public void SaveCon()
     {
-        moneyManager.addMoney(-priceOfCon);
+        //moneyManager.addMoney(-priceOfCon);
         previewObject.GetComponent<SpriteRenderer>().color = new Color(99f, 99f, 99f, 225f);
         ReturnList(lastGameObjectclickd).Add(previewObject);
         LastGameObjectChecker lGOC = previewObject.GetComponent<LastGameObjectChecker>();
@@ -312,6 +314,7 @@ public class BuildModeEnabler : MonoBehaviour
     {
         // Create a preview object at the hit point
         previewObject = Instantiate(buildModeObject, hit.point, Quaternion.identity);
+        moneyManager.addMoney(-priceOfCon);
         previewOffset = new Vector2(previewObject.transform.position.x, previewObject.transform.position.y) - hit.point;
         previewObject.transform.position = GetWorldPosition(GetNeighborCell(lastGameObjectclickd.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) + previewOffset;
         previewObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
@@ -398,7 +401,7 @@ public class BuildModeEnabler : MonoBehaviour
         Vector2 cameraPosition = mainCamera.transform.position;
         Vector2 cameraSize = new Vector2(mainCamera.orthographicSize * mainCamera.aspect, mainCamera.orthographicSize);
 
-        Rect cameraViewRect = new Rect(cameraPosition - cameraSize, cameraSize * 2f);
+        Rect cameraViewRect = new Rect(cameraPosition - cameraSize + buildOffset, (cameraSize - buildOffset) * 2f );
 
         return cameraViewRect.Contains(point);
     }

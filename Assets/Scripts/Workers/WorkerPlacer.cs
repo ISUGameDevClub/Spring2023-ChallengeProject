@@ -2,33 +2,61 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class WorkerPlacer : MonoBehaviour
 {
-    [SerializeField] private GameObject worker;
-    [SerializeField] private GameObject ghostWorker;
+    //events
+    public event Action<Worker> workerPlaced;
+
+    [SerializeField] private List<GameObject> worker = new List<GameObject>();
+
     private GameObject tempWorker;
     private bool isPlacing = false;
 
     Vector2 mousePos;
 
-    public void StartPlacing()
+    private MoneyManager moneyManager;
+
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        moneyManager = FindObjectOfType<MoneyManager>();
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
+    public void StartPlacing(int value)
     {
         isPlacing = true;
-        tempWorker = Instantiate(ghostWorker, mousePos, Quaternion.identity);
+        tempWorker = Instantiate(worker[value], mousePos, Quaternion.identity);
     }
 
     private void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (tempWorker != null) tempWorker.transform.position = mousePos;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 
         if (Input.GetMouseButtonDown(0) && isPlacing && hit.collider == null)
         {
-            Destroy(tempWorker);
-            Instantiate(worker, mousePos, Quaternion.identity);
+            if(gameManager.workerAmount.ContainsKey(tempWorker))
+            {
+                gameManager.workerAmount[tempWorker] += 1;
+            }
+            else
+            {
+                gameManager.workerAmount.Add(tempWorker, 1);
+            }
+            
+            workerPlaced?.Invoke(tempWorker.GetComponent<Worker>());
+
+            tempWorker.GetComponent<Worker>().StartPacking();
+            moneyManager.subtractMoney(tempWorker.GetComponent<Worker>().cost);
             isPlacing = false;
+            tempWorker = null;
         }
     }
 }
