@@ -74,8 +74,8 @@ public class BuildModeEnabler : MonoBehaviour
                 if(hit.collider.gameObject.layer == 11) 
                 {
                     Debug.Log("hit");
-                    gameManager.workerAmount[hit.collider.gameObject.GetComponent<Worker>().selfPrefab] -= 1;
-                    Destroy(hit.collider.gameObject);
+                    gameManager.workerAmount[hit.collider.GetComponent<Worker>().selfPrefab] -= 1;
+                    Destroy(hit.collider.GetComponent<Worker>().gameObject);
                 }
                 
                 List<GameObject> tempList = ReturnList(hit.collider.gameObject);

@@ -123,4 +123,5 @@ public class Worker : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRadius);
     }
+    
 }

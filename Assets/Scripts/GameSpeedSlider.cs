@@ -31,6 +31,6 @@ public class GameSpeedSlider : MonoBehaviour
     private void UpdateSpeedText(float speed)
     {
         // Update the speed text to show the current speed
-        speedText.text = "Speed: " + speed.ToString("F1") + "x";
+        speedText.text = speed.ToString("F1");
     }
 }
