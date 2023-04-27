@@ -34,7 +34,7 @@ public class Box : MonoBehaviour
         conveyorTime = Time.time;
     }
 
-    public void PackBox(float amount)
+    public bool PackBox(float amount)
     {
         fillBar.transform.GetChild(0).gameObject.SetActive(true);
         fillBar.transform.GetChild(1).gameObject.SetActive(true);
@@ -46,7 +46,7 @@ public class Box : MonoBehaviour
             //Debug.Log("Box is filled.");
             isPacked = true;
         }
-
+        return isPacked;
     }
 
 }
