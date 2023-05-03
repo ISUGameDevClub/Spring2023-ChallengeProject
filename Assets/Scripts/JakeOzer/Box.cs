@@ -2,27 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Box : MonoBehaviour
 {
     private float conveyorTime;
     private int conveyorIndex = 0;
-<<<<<<< HEAD
-    private float boxFill = 0;
-    private float boxFillMax = 100;
-=======
+
     public float boxFill { get; private set; } = 0;
     public float boxFillMax { get; private set; } = 100;
     public float speed;
 
     public float value;
 
->>>>>>> Paul's
     private bool isPacked = false;
     [SerializeField] private FillBar fillBar;
     [SerializeField] private Sprite packedSprite;
 
-
+    public event Action boxPacked;
     private void Start()
     {
         conveyorTime = Time.time;
@@ -33,6 +30,7 @@ public class Box : MonoBehaviour
     public float GetBoxFill() => boxFill;
     public float GetBoxFillMax() => boxFillMax;
     public bool IsPacked() => isPacked;
+    public bool hasBeenPacked = false;
 
     public void NextConveyor()
     {
@@ -56,6 +54,15 @@ public class Box : MonoBehaviour
             isPacked = true;
         }
         return isPacked;
+    }
+
+    void update()
+    {
+        if (isPacked && !hasBeenPacked)
+        {
+            boxPacked?.Invoke();
+            hasBeenPacked = true;
+        }
     }
 
 }
