@@ -125,8 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e321e6770ce9644b7c4f6dd146a0da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peeLimit: 0
-  peeTime: 0
+  peeTime: 5
+  peeAmount: 0
+  shakeSpeed: 100
+  shakeAmount: 0.01
   pee0: {fileID: 21300000, guid: a9915f46be53fbe499eda9e00d2299c4, type: 3}
   pee1: {fileID: 21300000, guid: 6d4ac637a4f17a3428b9b45f050d1276, type: 3}
   pee2: {fileID: 21300000, guid: 5fcbdc014d49d8045bb2af10961a937e, type: 3}

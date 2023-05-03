@@ -13,7 +13,7 @@ public class PeeMeter : MonoBehaviour
     private GameObject peeMeter;
     private SpriteRenderer spriteRenderer;
 
-    private Vector2 startPos;
+    private GameObject gameManager;
 
     [SerializeField]
     private float shakeSpeed;
@@ -37,14 +37,14 @@ public class PeeMeter : MonoBehaviour
     [SerializeField]
     private Sprite pee6;
 
-    bool peeBreak;
-    bool forcedPee;
+    private bool peeBreak;
+    private bool forcedPee;
 
 
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         peeMeter = gameObject.transform.GetChild(0).gameObject;
         spriteRenderer = peeMeter.GetComponent<SpriteRenderer>();
@@ -53,6 +53,8 @@ public class PeeMeter : MonoBehaviour
         chargeCooldown = true;
         peeBreak = false;
         forcedPee = false;
+
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
@@ -79,35 +81,41 @@ public class PeeMeter : MonoBehaviour
     //         spriteEnabled = true;
     //     }
 
-    //     if (Input.GetMouseButtonDown(0) && !peeBreak)
+
+    //     if (Input.GetMouseButtonDown(0) && !peeBreak && gameManager.GetComponent<GameManager>().isPlaying)
     //     {
     //         peeBreak = true;
 
-    //         startPeeBreak();
+    //          startPeeBreak();
     //     }
-    // }
+    //  }
 
     private void startPeeBreak()
     {
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .25f);
         gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-        startPos = gameObject.transform.position;
-        transform.position = new Vector3(1000, 1000, 1000);
+
+        gameObject.GetComponent<Worker>().StopPacking();
+        
+        gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
 
         StartCoroutine(peeBreakTime());
     }
 
     private IEnumerator peeCharge()
     {
-        chargeCooldown = false;
-        yield return new WaitForSeconds(peeTime);
-        int random = Random.Range(1, 6);
-        Debug.Log(random);
-        if (random == 5 && !peeBreak)
+        if (gameManager.GetComponent<GameManager>().isPlaying)
         {
-            peeAmount++;
+            chargeCooldown = false;
+            yield return new WaitForSeconds(peeTime);
+            int random = Random.Range(1, 6);
+            Debug.Log(random);
+            if (random == 5 && !peeBreak)
+            {
+                peeAmount++;
+            }
+            chargeCooldown = true;
         }
-        chargeCooldown = true;
     }
 
     private IEnumerator peeBreakTime()
@@ -124,9 +132,11 @@ public class PeeMeter : MonoBehaviour
             yield return new WaitForSeconds(10);
         }
 
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
+        gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
         peeBreak = false;
-        gameObject.transform.position = startPos;
+
+        gameObject.GetComponent<Worker>().StartPacking();
 
     }
 
@@ -137,6 +147,7 @@ public class PeeMeter : MonoBehaviour
         {
             case 0:
                 spriteRenderer.sprite = pee0;
+                startingPos = new Vector3(transform.position.x, transform.position.y+0.75f,5);
                 peeMeter.transform.position = startingPos;
                 break;
 
