@@ -457,8 +457,8 @@ MonoBehaviour:
   searchLength: 0.8
   lastGameObjectclickd: {fileID: 0}
   moneyManager: {fileID: 1991581816}
-  priceOfCon: 1
-  returnPriceOfCon: 1
+  priceOfCon: 12
+  returnPriceOfCon: 12
 --- !u!156049354 &253946934
 Grid:
   m_ObjectHideFlags: 0
@@ -29865,11 +29865,11 @@ PrefabInstance:
       objectReference: {fileID: 1207667129}
     - target: {fileID: 8400359371187331460, guid: 0461be70af12e2c44b0ae5a8c59b79b2, type: 3}
       propertyPath: totalMoney
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8400359371187331460, guid: 0461be70af12e2c44b0ae5a8c59b79b2, type: 3}
       propertyPath: startingCash
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0461be70af12e2c44b0ae5a8c59b79b2, type: 3}
