@@ -16,12 +16,26 @@ public class AudioManager : MonoBehaviour
     private AudioSource roundStart;
     [SerializeField]
     private AudioSource boxPacked;
+    [SerializeField]
+    private AudioSource tutorial;
+    [SerializeField]
+    private AudioSource win;
+    [SerializeField]
+    private AudioSource lose;
 
     private int boxQuantity = 0;
+
+    private static bool tutorialPlayerd = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        //tutorial
+        if (!tutorialPlayerd) {
+            tutorialPlayerd = true;
+            tutorial.Play();
+        }
+
         audioTrack = GetComponent<AudioTrackSource>();
         PlayTracks();
 
