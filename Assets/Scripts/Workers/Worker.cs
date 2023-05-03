@@ -98,7 +98,14 @@ public class Worker : MonoBehaviour
         keepTrack.gameObject.GetComponent<CircleCollider2D>().enabled = true;
     }
 
- private IEnumerator MoveCoroutine()
+    public void StopPacking()
+    {
+        CancelInvoke("CheckForBoxes");
+        GetComponent<BoxCollider2D>().enabled = false;
+        keepTrack.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+    }
+
+    private IEnumerator MoveCoroutine()
 {
     isMoving = true;
 
@@ -115,6 +122,9 @@ public class Worker : MonoBehaviour
     }
 
     isMoving = false;
+
+        
+    //After working animation, the worker is moved back to it's starting spot
     transform.position = startPos;
 }
 

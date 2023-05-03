@@ -3,7 +3,14 @@ guid: 52e321e6770ce9644b7c4f6dd146a0da
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pee0: {fileID: 21300000, guid: a9915f46be53fbe499eda9e00d2299c4, type: 3}
+  - pee1: {fileID: 21300000, guid: 6d4ac637a4f17a3428b9b45f050d1276, type: 3}
+  - pee2: {fileID: 21300000, guid: 5fcbdc014d49d8045bb2af10961a937e, type: 3}
+  - pee3: {fileID: 21300000, guid: 5657d199f9565f34f80dd2c5b0b0f39f, type: 3}
+  - pee4: {fileID: 21300000, guid: b5efef52302188e4c9aeef065dab6248, type: 3}
+  - pee5: {fileID: 21300000, guid: 9b79c76c790589440a3d29b70d34bfec, type: 3}
+  - pee6: {fileID: 21300000, guid: afca017dffd03ba4eada0b23292587b0, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

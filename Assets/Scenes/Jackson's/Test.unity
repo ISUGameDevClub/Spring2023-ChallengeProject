@@ -745,9 +745,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5895774423052323343, guid: 2a5c8ecd4a816344ba9b20651f3edaf9, type: 3}
+      propertyPath: m_Name
+      value: pee_meter
+      objectReference: {fileID: 0}
     - target: {fileID: 6157815513831623057, guid: 2a5c8ecd4a816344ba9b20651f3edaf9, type: 3}
       propertyPath: peeTime
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6157815513831623057, guid: 2a5c8ecd4a816344ba9b20651f3edaf9, type: 3}
       propertyPath: shakeSpeed
