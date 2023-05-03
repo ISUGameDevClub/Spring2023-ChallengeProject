@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Paul's/Drawing.unity
     guid: ff8366ef41aa6814ab48cc2878d06968
+  - enabled: 1
+    path: Assets/Scenes/Title Screen.unity
+    guid: 00219212ae6d566479cc165afa6edb09
   m_configObjects: {}
