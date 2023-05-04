@@ -40,16 +40,18 @@ public class WorkerPlacer : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 
-        if (Input.GetMouseButtonDown(0) && isPlacing && hit.collider == null)
+        if (Input.GetMouseButtonDown(0) && isPlacing )
         {
             Debug.Log("Placed");
             if(gameManager.workerAmount.ContainsKey(tempWorker))
             {
                 gameManager.workerAmount[tempWorker] += 1;
+                Debug.Log("Added 1");
             }
             else
             {
                 gameManager.workerAmount.Add(tempWorker, 1);
+                Debug.Log("Added 2");
             }
             
             workerPlaced?.Invoke(tempWorker.GetComponent<Worker>());

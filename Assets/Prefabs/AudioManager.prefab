@@ -470,6 +470,7 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 6962cc91ca50de7459962d419dfbe0a5, type: 3}
     maxVolume: 1
   fadeDurration: 1
+  musicMixer: {fileID: 24100000, guid: aef5ed27b4ff1f34f91ceadb78291ac5, type: 2}
 --- !u!1 &2936248440540709044
 GameObject:
   m_ObjectHideFlags: 0

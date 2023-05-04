@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -147,4 +147,17 @@ public class GameManager : MonoBehaviour
         }
      
     }
+
+
+    public void LoseScene( string sceneName)
+{
+    // Save the integer value using PlayerPrefs
+    PlayerPrefs.SetInt("Money", ((int)moneyManager.totalMoneyMade));
+    PlayerPrefs.SetInt("Round", currentRound);
+
+    PlayerPrefs.Save();
+
+    // Load the specified scene
+    SceneManager.LoadScene(sceneName);
+}
 }

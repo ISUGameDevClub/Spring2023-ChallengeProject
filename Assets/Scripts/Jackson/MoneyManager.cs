@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class MoneyManager : MonoBehaviour
 {
     [SerializeField] public float totalMoney;
+    [SerializeField] public float totalMoneyMade;
     [SerializeField] public float startingCash;
     [SerializeField] private Text moneyText;
+
 
     private void Start()
     {
         totalMoney = startingCash;
+        totalMoneyMade = startingCash;
     }
 
     private void Update()
@@ -27,6 +30,7 @@ public class MoneyManager : MonoBehaviour
     public void addMoney(float addedMoney)
     {
         totalMoney += addedMoney;
+        totalMoneyMade += addedMoney;
     }
 
     public void subtractMoney(float subtractedMoney)

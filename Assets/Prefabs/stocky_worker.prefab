@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 534743362409023982}
   - component: {fileID: 9184536597774237580}
   - component: {fileID: 5159320220752769723}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: stocky_worker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

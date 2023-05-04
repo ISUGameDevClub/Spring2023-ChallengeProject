@@ -74,21 +74,21 @@ public class PeeMeter : MonoBehaviour
         spriteEnabled = false;
     }
 
-    // private void OnMouseOver()
-    // {
-    //     if (!peeBreak)
-    //     {
-    //         spriteEnabled = true;
-    //     }
+    private void OnMouseOver()
+    {
+        if (!peeBreak)
+        {
+            spriteEnabled = true;
+        }
 
 
-    //     if (Input.GetMouseButtonDown(0) && !peeBreak && gameManager.GetComponent<GameManager>().isPlaying)
-    //     {
-    //         peeBreak = true;
+        if (Input.GetMouseButtonDown(0) && !peeBreak && gameManager.GetComponent<GameManager>().isPlaying)
+        {
+            peeBreak = true;
 
-    //          startPeeBreak();
-    //     }
-    //  }
+             startPeeBreak();
+        }
+     }
 
     private void startPeeBreak()
     {
