@@ -127,9 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70711380eb963bc44ab346426298b189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRadius: 1.44
+  sightRadius: 1.22
   packRate: 15
-  packSpeed: 0.5
+  packSpeed: 0.4
   moveDistance: 0.1
   moveSpeed: 10
   isMouseOver: 0

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public event Action roundEnd;
     public event Action roundWin;
     public event Action roundLose;
-
+    public event Action win;
 
     //not events
     public BuildModeEnabler BME;
@@ -141,7 +141,16 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game Over");
             roundLose?.Invoke();
             LoseScene("LoseScene");
-        }else{
+        }if(currentRound > 20)
+        {
+            if (PlayerPrefs.GetInt("BestMoney") < ((int)moneyManager.totalMoneyMade)) PlayerPrefs.SetInt("BestMoney", ((int)moneyManager.totalMoneyMade));
+            if (PlayerPrefs.GetInt("BestRound") < currentRound) PlayerPrefs.SetInt("BestRound", currentRound);
+            PlayerPrefs.SetInt("Money", ((int)moneyManager.totalMoneyMade));
+            PlayerPrefs.SetInt("Round", currentRound);
+            win?.Invoke();
+            SceneManager.LoadScene("Title Screen");
+        }
+        else{
             //Win
             Debug.Log("next Round");
             roundWin?.Invoke();
