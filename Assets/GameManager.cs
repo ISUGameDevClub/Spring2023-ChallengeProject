@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
             //Game Over
             Debug.Log("Game Over");
             roundLose?.Invoke();
+            LoseScene("LoseScene");
         }else{
             //Win
             Debug.Log("next Round");
@@ -152,6 +153,8 @@ public class GameManager : MonoBehaviour
     public void LoseScene( string sceneName)
 {
     // Save the integer value using PlayerPrefs
+    if(PlayerPrefs.GetInt("BestMoney") < ((int)moneyManager.totalMoneyMade)) PlayerPrefs.SetInt("BestMoney", ((int)moneyManager.totalMoneyMade));
+    if(PlayerPrefs.GetInt("BestRound") < currentRound) PlayerPrefs.SetInt("BestRound", currentRound);
     PlayerPrefs.SetInt("Money", ((int)moneyManager.totalMoneyMade));
     PlayerPrefs.SetInt("Round", currentRound);
 
