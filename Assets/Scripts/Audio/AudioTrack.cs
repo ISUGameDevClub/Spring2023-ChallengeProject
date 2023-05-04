@@ -18,7 +18,7 @@ public class AudioTrack
     // public AudioSource Source => source;
     public float MaxVolume => maxVolume;
 
-    public void Initialize( GameObject hostObject , AudioMixer mixer) {
+    public void Initialize( GameObject hostObject) {
         if ( source != null) {
             Debug.LogError("AudioTrack already initialized");
             return;
@@ -29,7 +29,6 @@ public class AudioTrack
         source.clip = clip;
         source.volume = 0f;
         source.loop = true;
-        source.outputAudioMixerGroup = mixer.FindMatchingGroups("Music")[0];
 
         source.Play();
     }

@@ -54,6 +54,7 @@ public class AudioManager : MonoBehaviour
     }
 
     private void OnWorkerPlaced(Worker worker) {
+        Debug.Log("boxplaced event");
         worker.boxPacked += _ => boxPacked.Play();
     }
 

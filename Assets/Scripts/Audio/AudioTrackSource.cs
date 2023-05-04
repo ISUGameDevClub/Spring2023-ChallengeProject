@@ -10,8 +10,7 @@ public class AudioTrackSource : MonoBehaviour
     private AudioTrack[] audioTracks;
     [SerializeField]
     private float fadeDurration = 1f;
-    [SerializeField]
-    private AudioMixer musicMixer;
+
 
     private Coroutine[] fadeRoutines;
 
@@ -20,7 +19,7 @@ public class AudioTrackSource : MonoBehaviour
 
         foreach (AudioTrack track in audioTracks)
         {
-            track.Initialize(gameObject , musicMixer);
+            track.Initialize(gameObject);
         }
     }
 

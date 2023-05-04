@@ -77,6 +77,7 @@ public class BoxSpawner : MonoBehaviour
         boxMover.AddBoxToGameList(newBox);
         //invoke event
         BoxSpawned?.Invoke();
+        Debug.Log("called event");
     }
 
     public void SetTimeline(int timelineIndex)
